@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include "tests.h"
 #include "production.h"
-#include "TMSName.h"
+#include "BenjaminPetersName.h"
 
 int main(int argc, char* argv[]) {
 	puts("!!!Let's do HW1!!!"); /* prints !!!Hello World!!! */
