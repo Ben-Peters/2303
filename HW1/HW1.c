@@ -1,10 +1,10 @@
 /*
  ============================================================================
- Name        : HW3.c
+ Name        : HW1.c
  Author      : 
  Version     :
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Description : Main file for Homework 1
  ============================================================================
  */
 
@@ -15,7 +15,7 @@
 #include "BenjaminPeters.h"
 
 int main(int argc, char* argv[]) {
-	puts("!!!Let's do HW1!!!"); /* prints !!!Hello World!!! */
+	puts("!!!Let's do HW1!!!"); /* prints !!!Let's do HW1!!! */
 	if(tests())
 	{
 		puts("About to run production.");
