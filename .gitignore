@@ -2,3 +2,5 @@
 *CMakeLists.txt
 *.xml
 *\.idea
+*.png
+*.zip
