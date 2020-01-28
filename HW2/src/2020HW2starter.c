@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include "tests.h"
 #include "production.h"
-#include "TMSName.h"
 
 int main(int argc, char* argv[]) {
 	puts("!!!Let's do HW2  !!!"); /* prints !!!Hello World!!! */
