@@ -84,8 +84,16 @@ bool production(int argc, char* argv[])
 
 	int* theSpaceP = (int*) malloc(20*20*sizeof(int));
     bool okInit = initSpace(theSpaceP, 20);
+    for(int row = 0; row < 20; row++){
+        for(int col = 0; col < 20; col++){
+            printf("%d",*(theSpaceP+row*20 + col));
+        }
+        puts("\n");
+    }
 
 
 	//we'll want to read the file
 	return answer;
 }
+
+

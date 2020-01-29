@@ -9,9 +9,9 @@
 bool initSpace(int* corner, int howManyRows)
 {
 	bool ok = true;
-	for(int row = 0; row< 20; row++)
+	for(int row = 0; row< howManyRows; row++)
 	{
-		for(int col = 0; col < 20; col++)
+		for(int col = 0; col < howManyRows; col++)
 		{
 			*(corner+row*howManyRows + col) = 0;
 		}

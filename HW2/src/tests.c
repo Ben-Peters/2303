@@ -52,10 +52,30 @@ bool testGotAdjacencyMatrix()
 bool testSomethingElse()
 {
 	bool ans = true;
-	//what are the criteria for success for
-	//test case 1:
-	//test case 2:
-
+	puts("Testing the initSpace:");
+    int* theSpaceP = (int*) malloc(20*20*sizeof(int));
+    bool okInit = initSpace(theSpaceP, 20);
+    for(int row = 0; row < 20; row++){
+        for(int col = 0; col < 20; col++){
+            printf("%d|",*(theSpaceP+row*20 + col));
+        }
+        puts("");
+        for(int i = 0; i < 20;i++){
+            printf("- ");
+        }
+        puts("");
+    }
+    for(int row = 0; row < 20; row++){
+        for(int col = 0; col < 20; col++){
+            if(*(theSpaceP+row*20 + col) != 0){
+                ans = false;
+                puts("Not all the values were 0");
+            }
+        }
+    }
+    if(ans){
+        puts("initSpace tests passed!");
+    }
 	return ans;
 }
 bool testRemoveFromList()
