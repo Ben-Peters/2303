@@ -7,7 +7,7 @@
 
 #include "tests.h"
 #include "production.h"
-
+#include "display.h"
 
 bool tests()
 {
@@ -55,16 +55,7 @@ bool testSomethingElse()
 	puts("Testing the initSpace:");
     int* theSpaceP = (int*) malloc(20*20*sizeof(int));
     bool okInit = initSpace(theSpaceP, 20);
-    for(int row = 0; row < 20; row++){
-        for(int col = 0; col < 20; col++){
-            printf("%d|",*(theSpaceP+row*20 + col));
-        }
-        puts("");
-        for(int i = 0; i < 20;i++){
-            printf("- ");
-        }
-        puts("");
-    }
+    print2DArray(theSpaceP, 20);
     for(int row = 0; row < 20; row++){
         for(int col = 0; col < 20; col++){
             if(*(theSpaceP+row*20 + col) != 0){
