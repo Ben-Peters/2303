@@ -5,6 +5,7 @@
  *      Author: Therese
  */
 
+#include <stdlib.h>
 #include "marker.h"
 
 Marker* placeMarker(int r, int c)
