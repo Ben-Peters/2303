@@ -4,7 +4,7 @@
  Author      : 
  Version     :
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Description : Homework #2
  ============================================================================
  */
 
@@ -14,7 +14,7 @@
 #include "production.h"
 
 int main(int argc, char* argv[]) {
-	puts("!!!Let's do HW2  !!!"); /* prints !!!Hello World!!! */
+	puts("!!!Let's do HW2  !!!"); 
 	if(tests())
 	{
 		puts("About to run production.");
@@ -26,15 +26,4 @@ int main(int argc, char* argv[]) {
 
 	}
 	return EXIT_SUCCESS;
-}
-void print2DArray(int* start, int numRows){
-    for(int row = 0; row < numRows; row++){
-        for(int col = 0; col < numRows; col++){
-            printf("%d|",*(start+row*numRows + col));
-        }
-        for(int i = 0; i < numRows;i++){
-            printf("-");
-        }
-        puts("");
-    }
 }
