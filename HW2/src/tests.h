@@ -16,6 +16,9 @@ bool testReadFile();
 bool testGotAdjacencyMatrix();
 bool testSomethingElse();
 bool testRemoveFromList();
-
+bool testForInvalidCoordinates();
+bool testUpdateSpace();
+bool testUpdateSpaceAtCoordinates();
+bool testUpdateSpaceWithIndex();
 
 #endif /* TESTS_H_ */

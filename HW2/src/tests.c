@@ -16,7 +16,11 @@ bool tests()
 	bool ok2 = testGotAdjacencyMatrix();
 	bool ok3 = testSomethingElse();
 	bool ok4 = testRemoveFromList();
-	answer = ok1 && ok2 && ok3 && ok4;
+    bool ok5 = testForInvalidCoordinates();
+	bool ok6 = testUpdateSpace();
+	bool ok7 = testUpdateSpaceAtCoordinates();
+	bool ok8 = testUpdateSpaceWithIndex();
+	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8;
 	return answer;
 }
 
@@ -69,6 +73,7 @@ bool testSomethingElse()
     }
 	return ans;
 }
+
 bool testRemoveFromList()
 {
 	bool ok = true;
@@ -77,4 +82,94 @@ bool testRemoveFromList()
 	//test case 2:
 
 	return ok;
+}
+
+bool testForInvalidCoordinates(){
+    bool ok = true;
+    // Check multiple instances
+    for (int i = 0; i < 500; i++) {
+        int *coordinates = getRandCoordinates();
+        int row = *coordinates;
+        int col = *(coordinates + 1);
+        if (row >= 20 || col >= 20 || row < 0 || col < 0) {
+            ok = false;
+        }
+    }
+    if (ok){
+        puts("Pass: All coordinates were within bounds");
+    }else{
+        puts("Fail: Invalid coordinates were generated");
+    }
+    return ok;
+}
+
+bool testUpdateSpace(){
+    bool ok = false;
+    int* space = (int*) malloc(sizeof(int)*20*20);
+    initSpace(space, 20);
+    updateSpace(space, 20, 1, 1, 1);
+    int count = 0;
+    for (int row = 0; row < 20; row++) {
+        for (int col = 0; col < 20; col++) {
+            int val = *(space+row*20+col);
+            if (val != 0){
+                count++;
+            }
+        }
+    }
+    if (count == 1){
+        puts("Pass: Updated space successfully");
+    }else if (count == 0){
+        puts("Failed to update space");
+    }else{
+        puts("Fail: Multiple locations were updated");
+    }
+    return ok;
+}
+
+bool testUpdateSpaceAtCoordinates(){
+    bool ok = false;
+    int* space = (int*) malloc(sizeof(int)*20*20);
+    initSpace(space, 20);
+    int testRow = 4;
+    int testCol = 2;
+    updateSpace(space, 20, testRow, testCol, 1);
+    for (int row = 0; row < 20; row++) {
+        for (int col = 0; col < 20; col++) {
+            int val = *(space+row*20+col);
+            if (val != 0){
+                if (row == testRow && col == testCol){
+                    ok = true;
+                }
+            }
+        }
+    }
+    if (ok){
+        puts("Pass: Updated space at correct coordinates");
+    }else{
+        puts("Failed to update space at correct coordinates");
+    }
+    return ok;
+}
+
+bool testUpdateSpaceWithIndex(){
+    bool ok = false;
+    int* space = (int*) malloc(sizeof(int)*20*20);
+    initSpace(space, 20);
+    int index = 5;
+    updateSpace(space, 20, 1, 1, index);
+    for (int row = 0; row < 20; row++) {
+        for (int col = 0; col < 20; col++) {
+            int val = *(space+row*20+col);
+            if (val == index){
+                ok = true;
+            }
+        }
+    }
+    if (ok){
+        puts("Pass: Updated space with correct index");
+    }else{
+        puts("Failed to update space with correct index");
+    }
+    return ok;
 }
