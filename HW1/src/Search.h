@@ -8,8 +8,5 @@
 #include <stdbool.h>
 #include "House.h"
 
-int getNumberOfRooms();
-Room getNewRoom();
-bool haveTreasure();
 
 #endif //HW1_SEARCH_H

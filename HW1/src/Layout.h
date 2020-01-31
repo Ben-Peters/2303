@@ -5,13 +5,8 @@
 #ifndef HW1_LAYOUT_H
 #define HW1_LAYOUT_H
 
-
+#include "Room.h"
 #include <stdbool.h>
-
-typedef struct{
-    bool locked;
-    bool treasure;
-    int amountOfTreasure;
-}Room;
-bool open(Room);
+int countRooms();
+Room getFirstRoom();
 #endif //HW1_LAYOUT_H

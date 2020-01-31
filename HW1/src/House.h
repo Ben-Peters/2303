@@ -5,7 +5,8 @@
 #ifndef HW1_HOUSE_H
 #define HW1_HOUSE_H
 #include "Layout.h"
-int countRooms();
-Room getFirstRoom();
+int getNumberOfRooms();
+Room getNewRoom();
+
 
 #endif //HW1_HOUSE_H
