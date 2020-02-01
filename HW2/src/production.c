@@ -6,6 +6,9 @@
  */
 #include "production.h"
 #include "display.h"
+#include "marker.h"
+#include "LinkedList.h"
+#include "space.h"
 
 bool production(int argc, char* argv[])
 {
@@ -95,8 +98,10 @@ bool production(int argc, char* argv[])
 	//obtain space for 20x20 of integers
 	int size = 20;
 	int* theSpaceP = (int*) malloc(size*size*sizeof(int));
-	bool okInit = initSpace(theSpaceP, size);
-	print2DArray(theSpaceP, size);
+	initSpace(theSpaceP, size);
+	LLNode* ll = makeEmptyLinkedList();
+	int* coords = getRandCoordinates();
+	Marker* mP = placeMarker(coords[0], coords[1]);
 
 	//we'll want to read the file
 	return true;

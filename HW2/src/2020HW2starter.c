@@ -10,11 +10,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "tests.h"
 #include "production.h"
 
 int main(int argc, char* argv[]) {
-	puts("!!!Let's do HW2  !!!"); 
+	puts("!!!Let's do HW2  !!!");
+	srand(time(NULL));//initialize rng
 	if(tests())
 	{
 		puts("About to run production.");

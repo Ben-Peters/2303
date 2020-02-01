@@ -4,6 +4,7 @@
  *  Created on: Jan 27, 2020
  *      Author: Therese
  */
+#include <stdlib.h>
 #include "space.h"
 
 bool initSpace(int* corner, int howManyRows)
@@ -31,10 +32,8 @@ void updateSpace(int* space, int numOfRows, int row, int col, int value){
 
 // TODO: The actual random stuff (I'll get to that shortly)
 int* getRandCoordinates(){
-    int* coordinates = (int*) malloc(sizeof(int)*2);
-    int row = 0;
-    int col = 1;
-    *(coordinates) = row;
-    *(coordinates+1) = col;
+    int* coordinates = (int*) malloc(sizeof(int)*2);    
+    *(coordinates) = rand() % 20;
+    *(coordinates+1) = rand() % 20;
     return coordinates;
 }
