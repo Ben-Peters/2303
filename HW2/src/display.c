@@ -11,7 +11,7 @@ void print2DArray(int* start, int numRows){
     puts("");
 
     for(int row = 0; row < numRows; row++){
-        for(int col = 0; col < numRows; col++){
+        for(int col = numRows - 1; col >= 0; col--){
             printf("%d│",*(start+row*numRows + col));
         }
 	puts("");
@@ -22,18 +22,17 @@ void print2DArray(int* start, int numRows){
     }
 }
 
-void print2DArrayWithMarker(int* start, int numRows, Marker* mark) {
+void print2DArrayWithoutZero(int* start, int numRows) {
     for(int i = 0; i < numRows;i++){
     	printf("─┼");
     }
     puts("");
-
     for(int row = 0; row < numRows; row++){
-        for(int col = 0; col < numRows; col++){
-	    if(col == mark->col && row == mark->row) {
-		printf("X│");
+        for(int col = numRows - 1; col >= 0; col--){
+	    if( *(start+row*numRows+col) == 0) {
+		printf(" │");
 	    } else {
-                printf(" │");
+            	printf("%d│",*(start+row*numRows + col));
 	    }
         }
 	puts("");
@@ -42,4 +41,5 @@ void print2DArrayWithMarker(int* start, int numRows, Marker* mark) {
         }
         puts("");
     }
+    puts("");
 }

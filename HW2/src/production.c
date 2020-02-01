@@ -99,10 +99,23 @@ bool production(int argc, char* argv[])
 	int size = 20;
 	int* theSpaceP = (int*) malloc(size*size*sizeof(int));
 	initSpace(theSpaceP, size);
+	//init the LL
 	LLNode* ll = makeEmptyLinkedList();
+	//make the inital marker
 	int* coords = getRandCoordinates();
 	Marker* mP = placeMarker(coords[0], coords[1]);
-	print2DArrayWithMarker(theSpaceP, size, mP);
+	mP->index = 1;
+	savePayload(ll, mP);
+	
+	updateSpace(theSpaceP, size, mP->row, mP->col, mP->index);
+	print2DArrayWithoutZero(theSpaceP, size);
+
+	for(int idx = 2; idx < 21; idx++) {
+		//TODO makeadjacentboi 
+		savePayload(ll, mP);
+		print2DArrayWithoutZero(theSpaceP, size);
+	}
+	//TODO traverse&print
 
 	//we'll want to read the file
 	return true;

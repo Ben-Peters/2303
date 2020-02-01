@@ -5,6 +5,6 @@
 #include "marker.h"
 
 void print2DArray(int*, int);
-void print2DArrayWithMarker(int*, int, Marker*);
+void print2DArrayWithoutZero(int*, int);
 
 #endif
