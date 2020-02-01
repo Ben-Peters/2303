@@ -102,6 +102,7 @@ bool production(int argc, char* argv[])
 	LLNode* ll = makeEmptyLinkedList();
 	int* coords = getRandCoordinates();
 	Marker* mP = placeMarker(coords[0], coords[1]);
+	print2DArrayWithMarker(theSpaceP, size, mP);
 
 	//we'll want to read the file
 	return true;

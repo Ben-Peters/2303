@@ -20,5 +20,6 @@ bool testForInvalidCoordinates();
 bool testUpdateSpace();
 bool testUpdateSpaceAtCoordinates();
 bool testUpdateSpaceWithIndex();
+bool testPlaceMarker();
 
 #endif /* TESTS_H_ */

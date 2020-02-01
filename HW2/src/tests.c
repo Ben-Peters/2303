@@ -8,6 +8,7 @@
 #include "tests.h"
 #include "production.h"
 #include "display.h"
+#include "marker.h"
 
 bool tests()
 {
@@ -21,7 +22,8 @@ bool tests()
 	bool ok6 = testUpdateSpace();
 	bool ok7 = testUpdateSpaceAtCoordinates();
 	bool ok8 = testUpdateSpaceWithIndex();
-	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8;
+	bool ok9 = testPlaceMarker();
+	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8 && ok9;
 	return answer;
 }
 
@@ -126,7 +128,7 @@ bool testUpdateSpace(){
     }else{
         puts("Fail: Multiple locations were updated");
     }
-    return ok;
+    return count == 1;
 }
 
 bool testUpdateSpaceAtCoordinates(){
@@ -176,3 +178,17 @@ bool testUpdateSpaceWithIndex(){
     return ok;
 }
 
+bool testPlaceMarker() {
+	bool ok = true;
+	Marker* p = placeMarker(3, 4);
+	ok = ok && p->row == 3;
+	ok = ok && p->col == 4;
+	
+	if(ok) {
+		puts("Pass: Marker placed properly");
+	} else {
+		puts("Failed to place a marker");
+	}
+
+	return ok;
+}
