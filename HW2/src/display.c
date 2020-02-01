@@ -2,6 +2,7 @@
 
 #include "display.h"
 #include "marker.h"
+#include "LinkedList.h"
 #include <stdio.h>
 
 void print2DArray(int* start, int numRows){
@@ -42,4 +43,8 @@ void print2DArrayWithoutZero(int* start, int numRows) {
         puts("");
     }
     puts("");
+}
+
+void traverseAndPrint(LLNode* ll, bool print) {
+
 }

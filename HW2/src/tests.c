@@ -24,6 +24,11 @@ bool tests()
 	bool ok8 = testUpdateSpaceWithIndex();
 	bool ok9 = testPlaceMarker();
 	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8 && ok9;
+
+	ok1 = testDisplayTraceback();
+
+	answer = answer && ok1;
+
 	return answer;
 }
 
@@ -191,4 +196,32 @@ bool testPlaceMarker() {
 	}
 
 	return ok;
+}
+
+bool testDisplayTraceback() {
+	bool ok = false;
+	LLNode* ll = makeEmptyLinkedList();
+	
+	Marker* p = placeMarker(0, 0);
+	p->index = 0;
+	savePayload(ll, p);
+	
+	p = placeMarker(1, 1);
+	p->index = 1;
+	savePayload(ll, p);
+
+	p = placeMarker(2, 2);
+	p->index = 2;
+	savePayload(ll, p);
+	
+	traverseAndPrint(ll, false);
+
+	ok = isEmpty(ll);
+	if(ok) {
+		puts("Pass: traversed properly");
+	} else {
+		puts("Failed to traverse");
+	}
+	return ok;
+
 }
