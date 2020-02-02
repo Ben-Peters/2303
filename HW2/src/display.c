@@ -45,6 +45,23 @@ void print2DArrayWithoutZero(int* start, int numRows) {
     puts("");
 }
 
-void traverseAndPrint(LLNode* ll, bool print) {
-
+int traverseAndPrint(LLNode* ll, bool print) {
+	if(print) puts("BEGIN list traversal & path history >>>");
+	int count = 0;
+	if(ll->payP == (Payload*)0) {
+		if(print) {puts("Empty list.");}
+	}else{
+		LLNode* temp = ll;
+		while(temp) {
+			count++;
+			if(print) {
+				printf("Node #%d", temp->payP->index);
+				printf(" @ %d,", temp->payP->row);
+				printf(" %d\n", temp->payP->col);
+			}
+			temp = temp->next;
+		}
+	}
+	if(print) puts("<<< END traversal");
+	return count;
 }

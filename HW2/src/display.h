@@ -7,6 +7,6 @@
 
 void print2DArray(int*, int);
 void print2DArrayWithoutZero(int*, int);
-void traverseAndPrint(LLNode*, bool);
+int traverseAndPrint(LLNode*, bool);
 
 #endif

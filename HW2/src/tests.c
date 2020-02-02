@@ -214,9 +214,8 @@ bool testDisplayTraceback() {
 	p->index = 2;
 	savePayload(ll, p);
 	
-	traverseAndPrint(ll, false);
-
-	ok = isEmpty(ll);
+	ok = traverseAndPrint(ll, false) == 3;
+	
 	if(ok) {
 		puts("Pass: traversed properly");
 	} else {
