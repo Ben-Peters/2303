@@ -267,5 +267,5 @@ bool testMarkerIndex(){
         puts("Failed to update index");
     }
 
-    return false;
+    return ok;
 }
