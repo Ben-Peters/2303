@@ -43,7 +43,6 @@ void print2DArrayWithoutZero(int* start, int numRows) {
         }
         puts("");
     }
-    puts("");
 }
 
 int traverseAndPrint(LLNode* ll, bool print) {

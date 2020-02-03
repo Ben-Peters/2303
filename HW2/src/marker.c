@@ -75,6 +75,6 @@ Marker* makeAdjacentMarker(Marker* marker, int index){
         col = 0;
     }
     marker = placeMarker(row, col);
-    marker->index = index % 10;
+    marker->index = index;
     return marker;
 }
