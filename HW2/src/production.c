@@ -108,6 +108,8 @@ bool production(int argc, char* argv[])
 	savePayload(ll, mP);
 	
 	updateSpace(theSpaceP, size, mP->row, mP->col, mP->index);
+	puts("Step 1:");
+	print2DArrayWithoutZero(theSpaceP, size);
 
 	for(int idx = 2; idx < 21; idx++) {
 		int* coords = getRandCoordinates();
@@ -116,8 +118,9 @@ bool production(int argc, char* argv[])
 		savePayload(ll, mP);
 		
 		updateSpace(theSpaceP, size, mP->row, mP->col, mP->index);
+		printf("Step %d:\n", idx);
+		print2DArrayWithoutZero(theSpaceP, size);
 	}
-	print2DArrayWithoutZero(theSpaceP, size);
 	traverseAndPrint(ll, true);
 
 	//we'll want to read the file
