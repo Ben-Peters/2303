@@ -23,7 +23,9 @@ bool tests()
 	bool ok7 = testUpdateSpaceAtCoordinates();
 	bool ok8 = testUpdateSpaceWithIndex();
 	bool ok9 = testPlaceMarker();
-	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8 && ok9;
+	bool ok10 = testForAdjacentMarker();
+	bool ok11 = testMarkerIndex();
+	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8 && ok9 && ok10 && ok11;
 
 	ok1 = testDisplayTraceback();
 
@@ -223,4 +225,47 @@ bool testDisplayTraceback() {
 	}
 	return ok;
 
+}
+
+bool testForAdjacentMarker(){
+    bool ok = true;
+    for (int i = 0; i < 10; i++) { // Tests the function multiple times
+        Marker *marker = placeMarker(5, 5);
+        marker = makeAdjacentMarker(marker, 1);
+        int row = marker->row;
+        int col = marker->col;
+
+        // Possible solutions
+        if ((row == 4 || row == 5 || row == 6) && (col == 4 || col == 5 || col == 6)) {
+            // Pass
+        }else{
+            ok = false;
+        }
+    }
+    if (ok){
+        puts("Pass: All markers were adjacent");
+    }else{
+        puts("Fail: One or more markers were not adjacent");
+    }
+
+    return ok;
+}
+
+bool testMarkerIndex(){
+    bool ok = false;
+    Marker* marker = placeMarker(5, 5);
+    marker->index = 4;
+    marker = makeAdjacentMarker(marker, marker->index + 1);
+
+    if (marker->index == 5){
+        ok = true;
+    }
+
+    if (ok){
+        puts("Pass: Marker index verified");
+    }else{
+        puts("Failed to update index");
+    }
+
+    return false;
 }

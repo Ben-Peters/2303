@@ -22,5 +22,7 @@ bool testUpdateSpaceAtCoordinates();
 bool testUpdateSpaceWithIndex();
 bool testPlaceMarker();
 bool testDisplayTraceback();
+bool testForAdjacentMarker();
+bool testMarkerIndex();
 
 #endif /* TESTS_H_ */
