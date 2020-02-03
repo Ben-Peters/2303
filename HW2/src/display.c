@@ -25,20 +25,21 @@ void print2DArray(int* start, int numRows){
 
 void print2DArrayWithoutZero(int* start, int numRows) {
     for(int i = 0; i < numRows;i++){
-    	printf("─┼");
+    	printf("──┼");
     }
     puts("");
     for(int row = 0; row < numRows; row++){
         for(int col = numRows - 1; col >= 0; col--){
 	    if( *(start+row*numRows+col) == 0) {
-		printf(" │");
+		printf("  │");
 	    } else {
-            	printf("%d│",*(start+row*numRows + col));
+		if(*(start+row*numRows + col) < 10){printf(" ");}
+            	printf("%d│",*(start+row*numRows + col) );
 	    }
         }
 	puts("");
         for(int i = 0; i < numRows;i++){
-            printf("─┼");
+            printf("──┼");
         }
         puts("");
     }
@@ -59,7 +60,7 @@ int traverseAndPrint(LLNode* ll, bool print) {
 				printf(" @ %d,", temp->payP->row);
 				printf(" %d\n", temp->payP->col);
 			}
-			temp = temp->next;
+			temp = (LLNode*)temp->next;
 		}
 	}
 	if(print) puts("<<< END traversal");

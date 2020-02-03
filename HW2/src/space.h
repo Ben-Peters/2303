@@ -28,4 +28,6 @@ void updateSpace(int* space, int numOfRows, int row, int col, int value);
  */
 int* getRandCoordinates();
 
+int* getRandAdj(int, int, int);
+
 #endif /* SPACE_H_ */

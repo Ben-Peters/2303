@@ -108,14 +108,17 @@ bool production(int argc, char* argv[])
 	savePayload(ll, mP);
 	
 	updateSpace(theSpaceP, size, mP->row, mP->col, mP->index);
-	print2DArrayWithoutZero(theSpaceP, size);
 
 	for(int idx = 2; idx < 21; idx++) {
-		//TODO makeadjacentboi 
+		int* coords = getRandCoordinates();
+		mP = placeMarker(coords[0], coords[1]);
+		mP->index = idx;
 		savePayload(ll, mP);
-		print2DArrayWithoutZero(theSpaceP, size);
+		
+		updateSpace(theSpaceP, size, mP->row, mP->col, mP->index);
 	}
-	//TODO traverse&print
+	print2DArrayWithoutZero(theSpaceP, size);
+	traverseAndPrint(ll, true);
 
 	//we'll want to read the file
 	return true;
