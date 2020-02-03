@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : HW2.c
- Author      : 
+ Author      : Ben Peters, Tom Nurse, Alexander Hayden
  Version     :
  Copyright   : Your copyright notice
  Description : Homework #2

@@ -25,7 +25,10 @@ bool tests()
 	bool ok9 = testPlaceMarker();
 	bool ok10 = testForAdjacentMarker();
 	bool ok11 = testMarkerIndex();
-	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8 && ok9 && ok10 && ok11;
+	bool ok12 = testEmptyLinkedList();
+	bool ok13 = testAddElement();
+	bool ok14 = testMultiElementLinkedList();
+	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8 && ok9 && ok10 && ok11 && ok12 && ok13 && ok14;
 
 	ok1 = testDisplayTraceback();
 
@@ -93,6 +96,61 @@ bool testRemoveFromList()
 	//test case 2:
 
 	return ok;
+}
+
+bool testEmptyLinkedList(){
+    bool ok = false;
+
+    LLNode* list = makeEmptyLinkedList();
+    if (list->payP == (Payload*)0 && list->prev == (struct LLNode*)0 && list->next == (struct LLNode*)0){
+        ok = true;
+        puts("Pass: Successfully created empty linked list");
+    }else{
+        puts("Failed to create empty linked list");
+    }
+    return ok;
+}
+
+bool testAddElement(){
+    bool ok = false;
+    LLNode* list = makeEmptyLinkedList();
+    Marker* mP = placeMarker(1, 1);
+    Payload* marker = mP;
+    list->payP = marker;
+
+    // Function to test
+    LLNode* list2 = makeEmptyLinkedList();
+    savePayload(list2, mP);
+
+    if (list2->payP == list->payP){
+        ok = true;
+        puts("Pass: Successfully added element to linked list");
+    }else{
+        puts("Failed to add element to linked list");
+    }
+    return ok;
+}
+
+bool testMultiElementLinkedList(){
+    bool ok = false;
+
+    LLNode* list = makeEmptyLinkedList();
+    Marker* mP = placeMarker(1, 1);
+    savePayload(list, mP);
+
+    Marker* mP2 = placeMarker(2, 2);
+    savePayload(list, mP2);
+
+    LLNode* nextElement = list->next;
+
+    if (list->next != (struct LLNode*)0 && nextElement->prev == list){
+        ok = true;
+        puts("Pass: Successfully created a multi element linked list");
+    }else{
+        puts("Failed to create a multi element linked list");
+    }
+
+    return ok;
 }
 
 bool testForInvalidCoordinates(){
@@ -200,6 +258,7 @@ bool testPlaceMarker() {
 	return ok;
 }
 
+// Checks length of marker path
 bool testDisplayTraceback() {
 	bool ok = false;
 	LLNode* ll = makeEmptyLinkedList();
@@ -219,7 +278,7 @@ bool testDisplayTraceback() {
 	ok = traverseAndPrint(ll, false) == 3;
 	
 	if(ok) {
-		puts("Pass: traversed properly");
+		puts("Pass: Traversed properly");
 	} else {
 		puts("Failed to traverse");
 	}
@@ -237,7 +296,9 @@ bool testForAdjacentMarker(){
 
         // Possible solutions
         if ((row == 4 || row == 5 || row == 6) && (col == 4 || col == 5 || col == 6)) {
-            // Pass
+            if (row == 5 && col == 5){
+                ok = false;
+            }
         }else{
             ok = false;
         }
@@ -264,7 +325,7 @@ bool testMarkerIndex(){
     if (ok){
         puts("Pass: Marker index verified");
     }else{
-        puts("Failed to update index");
+        puts("Failed to update marker index");
     }
 
     return ok;

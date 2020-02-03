@@ -24,5 +24,8 @@ bool testPlaceMarker();
 bool testDisplayTraceback();
 bool testForAdjacentMarker();
 bool testMarkerIndex();
+bool testEmptyLinkedList();
+bool testAddElement();
+bool testMultiElementLinkedList();
 
 #endif /* TESTS_H_ */

@@ -30,9 +30,8 @@ void updateSpace(int* space, int numOfRows, int row, int col, int value){
     }
 }
 
-// TODO: The actual random stuff (I'll get to that shortly)
 int* getRandCoordinates(){
-    int* coordinates = (int*) malloc(sizeof(int)*2); 
+    int* coordinates = (int*) malloc(sizeof(int)*2);
     *(coordinates) = rand() % 20;
     *(coordinates+1) = rand() % 20;
     return coordinates;
