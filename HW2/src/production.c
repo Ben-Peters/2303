@@ -112,9 +112,7 @@ bool production(int argc, char* argv[])
 	print2DArrayWithoutZero(theSpaceP, size);
 
 	for(int idx = 2; idx < 21; idx++) {
-		int* coords = getRandCoordinates();
-		mP = placeMarker(coords[0], coords[1]);
-		mP->index = idx;
+		mP = makeAdjacentMarker(mP, idx);
 		savePayload(ll, mP);
 		
 		updateSpace(theSpaceP, size, mP->row, mP->col, mP->index);
