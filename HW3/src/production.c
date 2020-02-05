@@ -135,7 +135,7 @@ bool production(int argc, char* argv[])
 							printf("found treasure updated to %f.\n", foundTreasure);
 							printf("enqueuing room %d.\n", col); fflush(stdout);
 							printf("Before enqueuing queue empty reports %d\n", isEmpty(searchQ));
-							savePayload(0,0)//TODO: what goes here?
+							savePayload(0,0);//TODO: what goes here?
 							srP = (SearchResults*) malloc(sizeof(SearchResults));
 							srP->roomNumber=theRoomPs[col]->roomNumber;
 							srP->treasure = theRoomPs[col]->treasure;
