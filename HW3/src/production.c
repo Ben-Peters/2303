@@ -37,7 +37,7 @@ bool production(int argc, char* argv[])
 			{
 			case 1:
 				//this is filename
-				printf("The length of the filename is %d.\n",strlen(argv[i]));
+				printf("The length of the filename is %lu.\n",strlen(argv[i]));
 				printf("The proposed filename is %s.\n", argv[i]);
 				if(strlen(argv[i])>=FILENAMELENGTHALLOWANCE)
 				{

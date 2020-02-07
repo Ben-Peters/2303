@@ -61,7 +61,7 @@ bool testReadFile()
 		printf("%f\n", theRoomPs[i]->treasure);
 	}
 
-    fclose();
+    //fclose("houseGraph.txt");
 	return ok;
 }
 
@@ -199,4 +199,8 @@ bool testPrintHistory()
 {
 	bool ok = true;
 	return ok;
+}
+
+bool testEnqueue(){
+    return false;
 }
