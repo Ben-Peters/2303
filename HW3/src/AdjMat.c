@@ -27,6 +27,7 @@ void setEdge(AdjMat* adjMP, int row, int col)
 
 	int ncols = adjMP->n;
 	int* arrayBeginning = adjMP->edgesP;
+	printf("%d", (ncols*row) +col);
 	*(arrayBeginning + (ncols*row) +col) = 1;
 	*(arrayBeginning + (ncols*col) + row) = 1;
 }

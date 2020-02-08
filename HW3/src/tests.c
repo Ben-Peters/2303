@@ -68,8 +68,38 @@ bool testReadFile()
 bool testGotAdjacencyMatrix()
 {
 	bool ans = true;
-
-
+    AdjMat* realAdjMP = (AdjMat*) malloc(sizeof(AdjMat));
+    AdjMat* testAdjMP = (AdjMat*) malloc(sizeof(AdjMat));
+    Room* theRoomPs[10];
+    int howManyRooms = 8;
+    testAdjMP -> n = howManyRooms;
+    testAdjMP->edgesP = (int*) malloc(howManyRooms * howManyRooms *sizeof(int));
+    puts("Before setEdge"); fflush(stdout);
+    init(testAdjMP);
+    setEdge(realAdjMP, 0, 0);
+    setEdge(realAdjMP, 1, 1);
+    setEdge(realAdjMP, 2, 0);
+    setEdge(realAdjMP, 2, 2);
+    setEdge(realAdjMP, 3, 1);
+    setEdge(realAdjMP, 3, 3);
+    setEdge(realAdjMP, 4, 0);
+    setEdge(realAdjMP, 4, 2);
+    setEdge(realAdjMP, 5, 1);
+    setEdge(realAdjMP, 5, 2);
+    setEdge(realAdjMP, 5, 5);
+    setEdge(realAdjMP, 6, 0);
+    setEdge(realAdjMP, 6, 1);
+    setEdge(realAdjMP, 6, 2);
+    setEdge(realAdjMP, 6, 4);
+    int numRooms = 8;
+    puts("before readFile");
+    readFile("../houseGraph.txt", &numRooms, testAdjMP, theRoomPs);
+    if(!ans){
+        puts("Fail: Got Adjacency Matrix");
+    }
+    else{
+        puts("Pass: Got Adjacency Matrix");
+    }
 	return ans;
 }
 
