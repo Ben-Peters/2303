@@ -180,7 +180,7 @@ void printHistory(LLNode2* hp)
             room =temp->payP->roomNumber;
             treasureSubtotal+= temp->payP->treasure;
             printf("The room was %d, and the treasure subtotal was %f.\n", room, treasureSubtotal);
-            //TODO: what goes here?
+            temp = temp->next
 
         }
         room =temp->payP->roomNumber;
