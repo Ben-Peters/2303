@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : 2020HW3starter.c
- Author      : 
+ Author      : Ben Peters, Tom Nurse, Alexander Hayden
  Version     :
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style

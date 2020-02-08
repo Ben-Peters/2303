@@ -234,3 +234,12 @@ bool readFile(char* filename, int* nrooms, AdjMat* adjMP, Room** theRoomPs)
 	return ok;
 }
 
+int promptNumOfRooms(){
+
+    return 0;
+}
+
+float promptAmountTreasure(){
+    return 0;
+}
+

@@ -21,5 +21,7 @@
 bool production(int argc, char* argv[]);
 bool readFile(char* filename, int* nrooms, AdjMat* adjMP, Room** theRoomPs);
 void displayBoard();
+int promptNumOfRooms();
+float promptAmountTreasure();
 
 #endif /* PRODUCTION_H_ */
