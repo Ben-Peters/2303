@@ -36,7 +36,7 @@ bool testReadFile()
 	Room* theRoomPs[10];//addresses for 10 rooms
 
 
-	ok = readFile("..\\houseGraph.txt", &answer, adjMP, theRoomPs); //read the file
+	ok = readFile("../houseGraph.txt", &answer, adjMP, theRoomPs); //read the file
 	if(ok)
 	{
 		if(answer!=rightAnswer)

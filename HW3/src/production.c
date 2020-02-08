@@ -106,6 +106,7 @@ bool production(int argc, char* argv[])
 		{
 			//here we are enqueueing room 0
 			puts("Enqueuing room 0");
+			savePayload(searchQ, 0);
 			//TODO: what else goes here?
 
 		}
