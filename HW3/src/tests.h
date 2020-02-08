@@ -20,5 +20,4 @@ bool testEnqueue();
 bool testRemoveFromList();
 bool testPrintHistory();
 
-
 #endif /* TESTS_H_ */

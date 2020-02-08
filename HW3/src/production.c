@@ -235,11 +235,16 @@ bool readFile(char* filename, int* nrooms, AdjMat* adjMP, Room** theRoomPs)
 }
 
 int promptNumOfRooms(){
-
-    return 0;
+    int rooms = 0;
+    printf("Enter the number of rooms to search: ");
+    scanf("%d", &rooms);
+    return rooms;
 }
 
 float promptAmountTreasure(){
-    return 0;
+    float treasure = 0;
+    printf("Enter the max amount of treasure to search for: ");
+    scanf("%f", &treasure);
+    return treasure;
 }
 
