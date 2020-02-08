@@ -106,8 +106,8 @@ bool production(int argc, char* argv[])
 		{
 			//here we are enqueueing room 0
 			puts("Enqueuing room 0");
-			savePayload(searchQ, 0);
-			//TODO: what else goes here?
+			savePayload(searchQ, roomBeingSearchedP);
+			//TODO: what else goes here? DONE?
 
 		}
 
@@ -127,20 +127,20 @@ bool production(int argc, char* argv[])
 						printf("Room %d hasn't already been searched.\n", col);
 						//we set it to searched
 						theRoomPs[col]->searched=true;
-						if(true)//TODO:what's the condition?
+						if(!done)//TODO:what's the condition?
 							//we check whether we can take the treasure vs. limit
 							//we check whether we've hit the room limit
 						{//we enqueue it for search
-							foundTreasure += 0;//TODO what goes here?
-							searchedRooms=0;//TODO what goes here?
+							foundTreasure += roomBeingSearchedP->treasure;//TODO what goes here?
+							searchedRooms += 1;//TODO what goes here?
 							printf("found treasure updated to %f.\n", foundTreasure);
 							printf("enqueuing room %d.\n", col); fflush(stdout);
 							printf("Before enqueuing queue empty reports %d\n", isEmpty(searchQ));
-							savePayload(0,0);//TODO: what goes here?
+							savePayload(searchQ,roomBeingSearchedP);//TODO: what goes here?
 							srP = (SearchResults*) malloc(sizeof(SearchResults));
 							srP->roomNumber=theRoomPs[col]->roomNumber;
 							srP->treasure = theRoomPs[col]->treasure;
-							savePayload2(0,0);//TODO: what goes here?
+							savePayload2(historyP,srP);//TODO: what goes here?
 							printf("After enqueuing, queue empty reports %d\n", isEmpty(searchQ));
 						}//check about search limits
 					}//room can still be searched
