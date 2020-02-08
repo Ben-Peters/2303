@@ -75,25 +75,30 @@ bool testGotAdjacencyMatrix()
     realAdjMP -> n = howManyRooms;
     realAdjMP->edgesP = (int*) malloc(howManyRooms * howManyRooms *sizeof(int));
     init(realAdjMP);
-    setEdge(realAdjMP, 0, 0);
-    setEdge(realAdjMP, 1, 1);
-    setEdge(realAdjMP, 2, 0);
-    setEdge(realAdjMP, 2, 2);
-    setEdge(realAdjMP, 3, 1);
-    setEdge(realAdjMP, 3, 3);
-    setEdge(realAdjMP, 4, 0);
-    setEdge(realAdjMP, 4, 2);
-    setEdge(realAdjMP, 5, 1);
+    setEdge(realAdjMP, 1, 0);
+    setEdge(realAdjMP, 2, 1);
+    setEdge(realAdjMP, 3, 0);
+    setEdge(realAdjMP, 3, 2);
+    setEdge(realAdjMP, 4, 1);
+    setEdge(realAdjMP, 4, 3);
+    setEdge(realAdjMP, 5, 0);
     setEdge(realAdjMP, 5, 2);
-    setEdge(realAdjMP, 5, 5);
-    setEdge(realAdjMP, 6, 0);
     setEdge(realAdjMP, 6, 1);
     setEdge(realAdjMP, 6, 2);
-    setEdge(realAdjMP, 6, 4);
+    setEdge(realAdjMP, 6, 5);
+    setEdge(realAdjMP, 7, 0);
+    setEdge(realAdjMP, 7, 1);
+    setEdge(realAdjMP, 7, 2);
+    setEdge(realAdjMP, 7, 4);
     int numRooms = 8;
-    puts("before readFile");
     readFile("../houseGraph.txt", &numRooms, testAdjMP, theRoomPs);
-    
+    for(int i = 0; i < numRooms; i++){
+        for(int j = 0; j < numRooms; j++){
+            if(getEdge(realAdjMP,i,j) != getEdge(testAdjMP,i,j)){
+                ans = false;
+            }
+        }
+    }
     if(!ans){
         puts("Fail: Got Adjacency Matrix");
     }
