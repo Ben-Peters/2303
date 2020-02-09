@@ -91,7 +91,7 @@ bool testGotAdjacencyMatrix()
     setEdge(realAdjMP, 7, 2);
     setEdge(realAdjMP, 7, 4);
     int numRooms = 8;
-    readFile("/Users/Tom/Projects/CS/CS2303/2303/HW3/houseGraph.txt", &numRooms, testAdjMP, theRoomPs);
+    readFile("../houseGraph.txt", &numRooms, testAdjMP, theRoomPs);
     for(int i = 0; i < numRooms; i++){
         for(int j = 0; j < numRooms; j++){
             if(getEdge(realAdjMP,i,j) != getEdge(testAdjMP,i,j)){
