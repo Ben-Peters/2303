@@ -243,13 +243,19 @@ bool testRemoveFromList()
 }
 bool testPrintHistory()
 {
-	bool ok = true;
+	bool ok = false;
     LLNode2* list = makeEmptyLinkedList2();
     SearchResults* srP = (SearchResults*) malloc(sizeof(SearchResults));
     srP->roomNumber= 1;
     srP->treasure = 1.25;
     savePayload2(list, srP);
     printHistory(list);
+    puts("Is the last line printed \"The room was 1, and the treasure subtotal was 1.250000.\" (y/n)");
+    char input;
+    scanf("%c",&input);
+    if(input == 'y'){
+        ok = true;
+    }
     if(ok){
         puts("Pass: testPrintHistory");
     }
