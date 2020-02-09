@@ -17,11 +17,8 @@ bool production(int argc, char* argv[])
 		puts("Didn't find any arguments.");
 		int rooms = promptNumOfRooms();
 		float treasure = promptAmountTreasure();
-		char* args[3];
-		args[0] = argv[0];
-		args[1] = (char)rooms;
-		args[2] = (char)treasure;
-		production(3, args);
+		// TODO: create arguments thing
+		// TODO: Recursive call to production with new arguments
 		fflush(stdout);
 		answer = false;
 	}
