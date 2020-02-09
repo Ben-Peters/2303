@@ -137,7 +137,7 @@ bool testMakeLList()
 	    puts("Fail: Unable to add multiple items to linkedList");
 	}
 	if (ok){
-	    puts("Pass: LinkedLists were processed successfully");
+	    puts("Pass: Test MakeLList, LinkedLists were processed successfully");
 	}
 
 	return ok;
@@ -244,9 +244,40 @@ bool testRemoveFromList()
 bool testPrintHistory()
 {
 	bool ok = true;
+    LLNode2* list = makeEmptyLinkedList2();
+    SearchResults* srP = (SearchResults*) malloc(sizeof(SearchResults));
+    srP->roomNumber= 1;
+    srP->treasure = 1.25;
+    savePayload2(list, srP);
+    printHistory(list);
+    if(ok){
+        puts("Pass: testPrintHistory");
+    }
+    else{
+        puts("Fail: testPrintHistory");
+    }
 	return ok;
 }
 
 bool testEnqueue(){
-    return false;
+    bool ok = false;
+    LLNode* list = makeEmptyLinkedList();
+    Room *rP = malloc(sizeof(Room));
+    rP -> roomNumber = 1;
+    rP -> searched = false;
+    rP -> treasure = 1.23;
+    Payload* roomPay = rP;
+    list->payP = roomPay;
+
+    // Function to test
+    LLNode* list2 = makeEmptyLinkedList();
+    savePayload(list2, rP);
+
+    if (list2->payP == list->payP){
+        ok = true;
+        puts("Pass: test enqueue");
+    }else{
+        puts("Failed to add element to linked list");
+    }
+    return ok;
 }
