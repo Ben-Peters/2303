@@ -37,7 +37,7 @@ bool testReadFile()
 
 
 	ok = readFile("../houseGraph.txt", &answer, adjMP, theRoomPs); //read the file
-	if(ok)
+    if(ok)
 	{
 		if(answer!=rightAnswer)
 		{
@@ -118,15 +118,26 @@ bool testMakeLList()
 	LLNode* theListP = makeEmptyLinkedList();
 	bool rightAnswer = true;
 	bool answer = isEmpty(theListP);
+	Room** room = (Room*) malloc(sizeof(Room));
+	savePayload(theListP, room);
 	if(answer!=rightAnswer)
 	{
 		ok = false;
 	}
 	//test case 2:
-	//TODO more test cases here
-	else
-	{
-		puts("test make LList did not pass.");
+	if (theListP->payP != room){
+	    ok = false;
+	    puts("Fail: Unable to add room to linkedList");
+	}
+	Room** room2 = (Room*) malloc(sizeof(Room));
+	savePayload(theListP, room2);
+	LLNode* nextElement = theListP->next;
+	if (theListP->next == (struct LLNode*)0 || nextElement->prev != theListP){
+	    ok = false;
+	    puts("Fail: Unable to add multiple items to linkedList");
+	}
+	if (ok){
+	    puts("Pass: LinkedLists were processed successfully");
 	}
 
 	return ok;
