@@ -15,8 +15,8 @@ bool production(int argc, char* argv[])
 	if(argc <=1) //no interesting information
 	{
 		puts("Didn't find any arguments.");
-		int rooms = promptNumOfRooms();
-		float treasure = promptAmountTreasure();
+		//int rooms = promptNumOfRooms();
+		//float treasure = promptAmountTreasure();
 		// TODO: create arguments thing
 		// TODO: Recursive call to production with new arguments
 		fflush(stdout);
@@ -29,8 +29,8 @@ bool production(int argc, char* argv[])
 		char filename[FILENAMELENGTHALLOWANCE];
 		char* eptr=(char*) malloc(sizeof(char*));
 		long aL=-1L;
-		int maxRooms;
-		float maxTreasure;
+		int maxRooms = -1;
+		float maxTreasure = -1;
 		double maxTreas;
 		for(int i = 1; i<argc; i++) //don't want to read argv[0]
 		{//argv[i] is a string
@@ -78,6 +78,13 @@ bool production(int argc, char* argv[])
 			}//end of switch
 		}//end of for loop on argument count
 		puts("after reading arguments"); fflush(stdout);
+
+		if(maxRooms == -1) 
+			maxRooms = promptNumOfRooms();
+		if(maxTreasure == -1)
+			maxTreasure = promptAmountTreasure();
+
+
 		//we'll want to read the file
 		int nrooms = -1;
 		AdjMat* adjMP = (AdjMat*) malloc(sizeof(AdjMat));
