@@ -5,8 +5,12 @@
 #include "LinkedList.h"
 #include <stdlib.h>
 #include <stdio.h>
-class LLNode {
-    bool isEmpty(LLNode *lp) {
+    LinkedList::LinkedList() {
+}
+    LinkedList::~LinkedList() {
+
+}
+    bool LinkedList::isEmpty(LLNode *lp) {
         bool ans = false;
         if (lp->payP == (Payload *) 0) {
             ans = true;
@@ -14,7 +18,7 @@ class LLNode {
         return ans;
     }
 
-    LinkedList:: bool isEmpty2(LLNode2 *lp) {
+    bool LinkedList::isEmpty2(LLNode2 *lp) {
         bool ans = false;
         if (lp->payP == (Payload2 *) 0) {
             ans = true;
@@ -31,7 +35,7 @@ class LLNode {
         return lp;
     }
 
-    LinkedList::LLNode2 *makeEmptyLinkedList2() {
+    LLNode2* LinkedList::makeEmptyLinkedList2() {
         LLNode2 *lp = (LLNode2 *) malloc(sizeof(LLNode2));
         lp->next = (struct LLNode2 *) 0;
         lp->prev = (struct LLNode2 *) 0;
@@ -228,4 +232,3 @@ class LLNode {
         //printf("Returning %p\n", retHead); fflush(stdout);
         return retHead;
     }
-};
