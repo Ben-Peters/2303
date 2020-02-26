@@ -20,12 +20,12 @@ public:
         struct LLNode2 *prev;
         Payload2 *payP;
     } LLNode2;
-    struct LLNode;
-    typedef struct {
+    typedef struct LLNode;
+    struct LLNode{
         struct LLNode *next;
         struct LLNode *prev;
         Payload *payP;
-    } LLNode;
+    };
     typedef struct {
         Payload *mp;
         LLNode *newQHead;
@@ -34,7 +34,7 @@ public:
     virtual ~LinkedList();
     LLNode* makeEmptyLinkedList();
     LLNode2* makeEmptyLinkedList2();
-    struct LLNode * removeFromList(LLNode *hp, Payload *pP);
+    LLNode * removeFromList(LLNode *hp, Payload *pP);
     void savePayload(LLNode *lp, Payload *mp);
     void savePayload2(LLNode2 *lp, Payload2 *mp);
     bool isEmpty(LLNode *lp);
