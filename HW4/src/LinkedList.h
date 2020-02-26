@@ -8,7 +8,7 @@
 #include "Room.h"
 
 class LinkedList {
-private:
+public:
     typedef struct {
         int roomNumber;
         float treasure;
@@ -20,8 +20,7 @@ private:
         struct LLNode2 *prev;
         Payload2 *payP;
     } LLNode2;
-public:
-    //struct LLNode;
+    struct LLNode;
     typedef struct {
         struct LLNode *next;
         struct LLNode *prev;
@@ -35,7 +34,7 @@ public:
     virtual ~LinkedList();
     LLNode* makeEmptyLinkedList();
     LLNode2* makeEmptyLinkedList2();
-    LLNode *removeFromList(LLNode *hp, Payload *pP);
+    struct LLNode * removeFromList(LLNode *hp, Payload *pP);
     void savePayload(LLNode *lp, Payload *mp);
     void savePayload2(LLNode2 *lp, Payload2 *mp);
     bool isEmpty(LLNode *lp);

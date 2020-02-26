@@ -26,11 +26,12 @@
         return ans;
     }
 
-    LinkedList::LLNode *makeEmptyLinkedList() {
-        LLNode *lp = (LLNode *) malloc(sizeof(LLNode));
-        lp->next = (struct LLNode *) 0;
-        lp->prev = (struct LLNode *) 0;
-        lp->payP = (Payload *) 0;
+    LinkedList::LLNode* makeEmptyLinkedList()
+    {
+        LLNode* lp = (LLNode*) malloc(sizeof(LLNode));
+        lp->next = (struct LLNode*)0;
+        lp->prev = (struct LLNode*)0;
+        lp->payP = (Payload*)0;
 
         return lp;
     }
@@ -44,7 +45,7 @@
         return lp;
     }
 
-    LinkedList:: void savePayload(LLNode *lp, Payload *mp) {
+    void LinkedList:: savePayload(LLNode *lp, Payload *mp) {
         //if the list is empty, then make payP be mp
         //else traverse the list,
         //make a new list element
@@ -67,7 +68,7 @@
         }
     }
 
-    void savePayload2(LLNode2 *lp, Payload2 *mp) {
+    void LinkedList:: savePayload2(LLNode2 *lp, Payload2 *mp) {
         //if the list is empty, then make payP be mp
         //else traverse the list,
         //make a new list element
@@ -90,7 +91,7 @@
         }
     }
 
-    Payload *dequeueLIFO(LLNode *lp) {
+    LinkedList::Payload* LinkedList::dequeueLIFO(LLNode *lp) {
         Payload *payP = (Payload *) 0;
         if (isEmpty(lp)) {
             puts("Trying to dequeue from empty.");
@@ -124,7 +125,7 @@
         return payP;
     }
 
-    backFromDQFIFO *dequeueFIFO(LLNode *lp) {
+   LinkedList::backFromDQFIFO* LinkedList::dequeueFIFO(LLNode *lp) {
         backFromDQFIFO *fp = (backFromDQFIFO *) malloc(sizeof(backFromDQFIFO));
         if (lp->next == (struct LLNode *) 0) {
             //list of length 1 or 0
@@ -141,7 +142,7 @@
         return fp;
     }
 
-    void printHistory(LLNode2 *hp) {
+    void LinkedList::printHistory(LLNode2 *hp) {
         puts("Printing history");
         if (hp->payP == (Payload2 *) 0) {
             puts("Empty list");
@@ -163,7 +164,7 @@
         }
     }
 
-    LLNode *removeFromList(LLNode *hP, Payload *pP) {
+    LinkedList::LLNode * LinkedList::removeFromList(LLNode *hP, Payload *pP) {
         LLNode *retHead = hP;//only changes if first element gets removed
         //find the payload
         //use the structure of a list, namely, list is empty or element followed by list
