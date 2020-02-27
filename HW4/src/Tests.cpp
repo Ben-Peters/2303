@@ -78,7 +78,7 @@ bool Tests::testReadFile()
     cout <<("The treasure values");
     for(int i = 0; i<answer; i++)
     {
-        printf("%f\n", theRoomPs[i]->treasure);
+        printf("%f\n", theRoomPs[i]->Room::treasure);
     }
 
     //fclose("houseGraph.txt");

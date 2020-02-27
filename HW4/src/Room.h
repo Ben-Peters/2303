@@ -7,7 +7,10 @@
 
 
 class Room {
-
+public:
+    int roomNumber;
+    float treasure;
+    bool searched;
 };
 
 

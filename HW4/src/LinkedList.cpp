@@ -134,7 +134,7 @@
             fp->newQHead = (LinkedListNode *) lp->next;
         }
         fp->mp = lp->payP;//all return values are set
-        if (lp->next != (struct LLNode *) 0) {
+        if (lp->next != (LinkedListNode *) 0) {
             //length list is >1
             free(lp);
         }
