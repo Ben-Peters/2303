@@ -35,16 +35,16 @@ public:
     } backFromDQFIFO;
     LinkedList();
     virtual ~LinkedList();
-    LinkedListNode* makeEmptyLinkedList();
-    LinkedListNode2* makeEmptyLinkedList2();
-    LinkedListNode * removeFromList(LinkedListNode *hp, Payload *pP);
-    void savePayload(LinkedListNode *lp, Payload *mp);
-    void savePayload2(LinkedListNode2 *lp, Payload2 *mp);
-    bool isEmpty(LinkedListNode *lp);
-    bool isEmpty2(LinkedListNode2 *lp);
-    Payload *dequeueLIFO(LinkedListNode *lp);
-    backFromDQFIFO *dequeueFIFO(LinkedListNode *lp);
-    void printHistory(LinkedListNode2 *hp);
+    static LinkedListNode* makeEmptyLinkedList();
+    static LinkedListNode2* makeEmptyLinkedList2();
+    static LinkedListNode * removeFromList(LinkedListNode *hp, Payload *pP);
+    static void savePayload(LinkedListNode *lp, Payload *mp);
+    static void savePayload2(LinkedListNode2 *lp, Payload2 *mp);
+    static bool isEmpty(LinkedListNode *lp);
+    static bool isEmpty2(LinkedListNode2 *lp);
+    static Payload *dequeueLIFO(LinkedListNode *lp);
+    static backFromDQFIFO *dequeueFIFO(LinkedListNode *lp);
+    static void printHistory(LinkedListNode2 *hp);
 
 };
 
