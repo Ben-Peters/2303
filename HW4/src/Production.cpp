@@ -22,7 +22,7 @@ bool Production::prod(int argc, char* argv[])
 
     if(argc <=1) //no interesting information
     {
-        cout <<("Didn't find any arguments.");
+        cout <<("Didn't find any arguments.")<<endl;
         fflush(stdout);
         answer = false;
     }
@@ -49,7 +49,7 @@ bool Production::prod(int argc, char* argv[])
                     printf("The proposed filename is %s.\n", argv[i]);
                     if(strlen(argv[i])>=FILENAMELENGTHALLOWANCE)
                     {
-                        cout <<("Filename is too long.");
+                        cout <<("Filename is too long.")<<endl;
                         fflush(stdout);
                         answer = false;
                     }
@@ -76,12 +76,12 @@ bool Production::prod(int argc, char* argv[])
                     break;
 
                 default:
-                    cout <<("Unexpected argument count."); fflush(stdout);
+                    cout <<("Unexpected argument count.")<<endl; fflush(stdout);
                     answer = false;
                     break;
             }//end of switch
         }//end of for loop on argument count
-        cout <<("after reading arguments"); fflush(stdout);
+        cout <<("after reading arguments")<<endl; fflush(stdout);
 
         if(maxRooms == -1)
             maxRooms = promptNumOfRooms();
@@ -96,16 +96,16 @@ bool Production::prod(int argc, char* argv[])
         //cout <<("Back from init Adj Mat"); fflush(stdout);
         Room* theRoomPs[10];//addresses for 10 rooms
 
-        cout <<("Before read file"); fflush(stdout);
+        cout <<("Before read file")<<endl; fflush(stdout);
         answer = readFile(filename, &nrooms, adjMP, theRoomPs); //read the file
-        cout <<("Back from read file"); fflush(stdout);
+        cout <<("Back from read file")<<endl; fflush(stdout);
 
         //we'll want to conduct the search
         //for the search we'll need an empty search history
         LinkedList::LinkedListNode2* historyP = LinkedList::makeEmptyLinkedList2();
         //we'll need the Queue, into which we put rooms, and remove rooms
         LinkedList::LinkedListNode* searchQ = LinkedList::makeEmptyLinkedList();
-        cout <<("starting search"); fflush(stdout);
+        cout <<("starting search")<<endl; fflush(stdout);
         //we'll start searching with room 0
         bool done = false;
         int searchedRooms = 0;
@@ -120,7 +120,7 @@ bool Production::prod(int argc, char* argv[])
         if((srP->treasure <= maxTreas) && (maxRooms>0))
         {
             //here we are enqueueing room 0
-            cout <<("Enqueuing room 0");
+            cout <<("Enqueuing room 0")<<endl;
             LinkedList::savePayload(searchQ, roomBeingSearchedP);
 
         }
@@ -134,7 +134,7 @@ bool Production::prod(int argc, char* argv[])
                 printf("checking rooms %d and %d.\n", roomBeingSearchedP->roomNumber, col); fflush(stdout);
                 if(AdjMatrix::getEdge(adjMP,roomBeingSearchedP->roomNumber, col)==1)
                 {
-                    cout <<("found an edge"); fflush(stdout);
+                    cout <<("found an edge")<<endl; fflush(stdout);
                     //if so, we check whether room has been searched
                     if(!(theRoomPs[col]->searched))
                     {//if it hasn't been searched
@@ -163,23 +163,23 @@ bool Production::prod(int argc, char* argv[])
                 if(foundTreasure >= maxTreasure)
                 {
                     done = true;
-                    cout <<("Done by treasure");
+                    cout <<("Done by treasure")<<endl;
                 }
                 if (searchedRooms>=maxRooms)
                 {
                     done = true;
-                    cout <<("Done by rooms");
+                    cout <<("Done by rooms")<<endl;
                 }
             }//scan for all possible rooms to search from this room
             //time to get the next room
             if(LinkedList::isEmpty(searchQ))
             {
                 done=true;
-                cout <<("Done by queue empty");
+                cout <<("Done by queue empty")<<endl;
             }
             if(!done)
             {
-                cout <<("Invoking  dequeue");fflush(stdout);
+                cout <<("Invoking  dequeue")<<endl;fflush(stdout);
                 roomBeingSearchedP = LinkedList::dequeueLIFO(searchQ);
 
             }
@@ -200,7 +200,7 @@ bool Production::readFile(char* filename, int* nrooms, AdjMatrix::AdjMat* adjMP,
 
     if (fp == NULL)
     {
-        cout <<("Error! opening file");
+        cout <<("Error! opening file")<<endl;
 
     }
     else
@@ -209,7 +209,7 @@ bool Production::readFile(char* filename, int* nrooms, AdjMatrix::AdjMat* adjMP,
         adjMP->n=*nrooms;
         int howManyRooms = *nrooms;
         adjMP->edgesP = (int*) malloc(howManyRooms * howManyRooms *sizeof(int));
-        cout <<("Before init Adj Mat"); fflush(stdout);
+        cout <<("Before init Adj Mat")<<endl; fflush(stdout);
         AdjMatrix::init(adjMP);
         int temp = -1;
         for(int roomr = 1; roomr<*nrooms; roomr++)

@@ -143,9 +143,11 @@
     }
 
     void LinkedList::printHistory(LinkedListNode2 *hp) {
+        ofstream fileOut;
+        fileOut.open("output.txt");
         puts("Printing history");
         if (hp->payP == (Payload2 *) 0) {
-            puts("Empty list");
+            fileOut<<("Empty list\n");
         } else {
             //traverse the list, printing as we go
             float treasureSubtotal = 0.0;
@@ -154,14 +156,15 @@
             while (temp->next) {
                 room = temp->payP->roomNumber;
                 treasureSubtotal += temp->payP->treasure;
-                printf("The room was %d, and the treasure subtotal was %f.\n", room, treasureSubtotal);
+                fileOut<<room << " "<< treasureSubtotal<<endl;
                 temp = (LinkedListNode2 *) temp->next;
 
             }
             room = temp->payP->roomNumber;
             treasureSubtotal += temp->payP->treasure;
-            printf("The room was %d, and the treasure subtotal was %f.\n", room, treasureSubtotal);
+            fileOut<<room << " "<< treasureSubtotal<<endl;
         }
+        fileOut.close();
     }
 
     LinkedList::LinkedListNode * LinkedList::removeFromList(LinkedListNode *hP, Payload *pP) {

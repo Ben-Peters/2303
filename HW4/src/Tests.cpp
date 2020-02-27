@@ -61,11 +61,11 @@ bool Tests::testReadFile()
     {
         if(answer!=rightAnswer)
         {
-            cout <<("test failed on number of rooms");
+            cout <<("test failed on number of rooms") << endl;
         }
 
     }
-    cout <<("The adjacency matrix");
+    cout <<("The adjacency matrix")<<endl;
     for(int i = 0; i<answer; i++)
     {
         for(int j = 0; j<answer; j++)
@@ -75,7 +75,7 @@ bool Tests::testReadFile()
         }
         printf("\n");
     }
-    cout <<("The treasure values");
+    cout <<("The treasure values")<<endl;
     for(int i = 0; i<answer; i++)
     {
         printf("%f\n", theRoomPs[i]->Room::treasure);
@@ -120,10 +120,10 @@ bool Tests::testGotAdjacencyMatrix()
         }
     }
     if(!ans){
-        cout <<("Fail: Got Adjacency Matrix");
+        cout <<("Fail: Got Adjacency Matrix")<<endl;
     }
     else{
-        cout <<("Pass: Got Adjacency Matrix");
+        cout <<("Pass: Got Adjacency Matrix")<<endl;
     }
     return ans;
 }
@@ -131,7 +131,7 @@ bool Tests::testGotAdjacencyMatrix()
 bool Tests::testMakeLList()
 {
     bool ok = true;
-    cout <<("starting testMakeLList");fflush(stdout);
+    cout <<("starting testMakeLList")<<endl;fflush(stdout);
     //what are the criteria for success for make LList?
     //should be able to make one, add data to it, get the data back
     //test case 1:
@@ -148,17 +148,17 @@ bool Tests::testMakeLList()
     //test case 2:
     if (theListP->payP != room){
         ok = false;
-        cout <<("Fail: Unable to add room to linkedList");
+        cout <<("Fail: Unable to add room to linkedList")<<endl;
     }
     Room* room2 = (Room*) malloc(sizeof(Room));
     LinkedList::savePayload(theListP, room2);
     LinkedList::LinkedListNode* nextElement = theListP->next;
     if (theListP->next == (LinkedList::LinkedListNode*)0 || nextElement->prev != theListP){
         ok = false;
-        cout <<("Fail: Unable to add multiple items to linkedList");
+        cout <<("Fail: Unable to add multiple items to linkedList")<<endl;
     }
     if (ok){
-        cout <<("Pass: Test MakeLList, LinkedLists were processed successfully");
+        cout <<("Pass: Test MakeLList, LinkedLists were processed successfully")<<endl;
     }
 
     return ok;
@@ -226,7 +226,7 @@ bool Tests::testRemoveFromList()
     pay3 = (LinkedList::Payload*) malloc(sizeof(Room));
     pay3->roomNumber = 3;
     LinkedList::savePayload(case1, pay3);
-    //cout <<("trying case 5");fflush(stdout);
+    cout <<("trying case 5")<<endl;fflush(stdout);
     ans = LinkedList::removeFromList(case1, pay3);//ans should be equal to case1
     LinkedList::LinkedListNode* theNext = (LinkedList::LinkedListNode*) ans->next; //this is element where pay3 got attached
     LinkedList::Payload* check = (LinkedList::Payload*) 0;
@@ -271,17 +271,17 @@ bool Tests::testPrintHistory()
     srP->treasure = 1.25;
     LinkedList::savePayload2(list, srP);
     LinkedList::printHistory(list);
-    cout <<("Is the last line printed \"The room was 1, and the treasure subtotal was 1.250000.\" (y/n)");
+    cout <<("Is the last line printed \"The room was 1, and the treasure subtotal was 1.250000.\" (y/n)")<<endl;
     char input;
     scanf("%c",&input);
     if(input == 'y'){
         ok = true;
     }
     if(ok){
-        cout <<("Pass: testPrintHistory");
+        cout <<("Pass: testPrintHistory")<<endl;
     }
     else{
-        cout <<("Fail: testPrintHistory");
+        cout <<("Fail: testPrintHistory")<<endl;
     }
     return ok;
 }
@@ -302,9 +302,9 @@ bool Tests::testEnqueue(){
 
     if (list2->payP == list->payP){
         ok = true;
-        cout <<("Pass: test enqueue");
+        cout <<("Pass: test enqueue")<<endl;
     }else{
-        cout <<("Failed to add element to linked list");
+        cout <<("Failed to add element to linked list")<<endl;
     }
     return ok;
 }
