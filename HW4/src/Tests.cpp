@@ -45,7 +45,7 @@ bool Tests::tests()
 
 bool Tests::testReadFile()
 {
-    cout << "starting testReadFile"; fflush(stdout);
+    cout << "starting testReadFile"<<endl; fflush(stdout);
     bool ok = false;
     //the file tells how many rooms there are
     int answer = -1;
@@ -56,7 +56,7 @@ bool Tests::testReadFile()
     Room* theRoomPs[10];//addresses for 10 rooms
 
 
-    ok = readFile("../houseGraph.txt", &answer, adjMP, theRoomPs); //read the file
+    ok = Production::readFile("../houseGraph.txt", &answer, adjMP, theRoomPs); //read the file
     if(ok)
     {
         if(answer!=rightAnswer)
@@ -111,7 +111,7 @@ bool Tests::testGotAdjacencyMatrix()
     AdjMatrix::setEdge(realAdjMP, 7, 2);
     AdjMatrix::setEdge(realAdjMP, 7, 4);
     int numRooms = 8;
-    readFile("../houseGraph.txt", &numRooms, testAdjMP, theRoomPs);
+    Production::readFile("../houseGraph.txt", &numRooms, testAdjMP, theRoomPs);
     for(int i = 0; i < numRooms; i++){
         for(int j = 0; j < numRooms; j++){
             if(AdjMatrix::getEdge(realAdjMP,i,j) != AdjMatrix::getEdge(testAdjMP,i,j)){

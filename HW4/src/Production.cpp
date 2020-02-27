@@ -192,7 +192,7 @@ bool Production::prod(int argc, char* argv[])
 
     return answer;
 }
-bool readFile(char* filename, int* nrooms, AdjMatrix::AdjMat* adjMP, Room** theRoomPs)
+bool Production::readFile(char* filename, int* nrooms, AdjMatrix::AdjMat* adjMP, Room** theRoomPs)
 {
     bool ok = false;
     //the file tells how many rooms there are
@@ -248,14 +248,14 @@ bool readFile(char* filename, int* nrooms, AdjMatrix::AdjMat* adjMP, Room** theR
     return ok;
 }
 
-int promptNumOfRooms(){
+int Production::promptNumOfRooms(){
     int rooms = 0;
     printf("Enter the number of rooms to search: ");
     scanf("%d", &rooms);
     return rooms;
 }
 
-float promptAmountTreasure(){
+float Production::promptAmountTreasure(){
     float treasure = 0;
     printf("Enter the max amount of treasure to search for: ");
     scanf("%f", &treasure);

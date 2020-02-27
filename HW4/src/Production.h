@@ -19,11 +19,11 @@ class Production {
 public:
 	Production();
 	virtual ~Production();
-    bool prod(int argc, char* argv[]);
-    bool readFile(char* filename, int* nrooms, AdjMatrix::AdjMat* adjMP, Room** theRoomPs);
-    void displayBoard();
-    int promptNumOfRooms();
-    float promptAmountTreasure();
+    static bool prod(int argc, char* argv[]);
+    static bool readFile(char* filename, int* nrooms, AdjMatrix::AdjMat* adjMP, Room** theRoomPs);
+    //static void displayBoard();
+    static int promptNumOfRooms();
+    static float promptAmountTreasure();
 };
 
 #endif /* PRODUCTION_H_ */

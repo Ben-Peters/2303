@@ -8,7 +8,7 @@
 #ifndef TESTS_H_
 #define TESTS_H_
 
-#include "production.h"
+#include "Production.h"
 #include "AdjMat.h"
 #include<stdio.h>
 using namespace std;
