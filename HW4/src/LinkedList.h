@@ -7,6 +7,8 @@
 
 #include "Room.h"
 
+
+
 class LinkedList {
 public:
     typedef struct {
@@ -15,33 +17,34 @@ public:
     } SearchResults;
     typedef Room Payload;
     typedef SearchResults Payload2;
-    typedef struct {
-        struct LLNode2 *next;
-        struct LLNode2 *prev;
-        Payload2 *payP;
-    } LLNode2;
-    typedef struct LLNode;
-    struct LLNode{
-        struct LLNode *next;
-        struct LLNode *prev;
-        Payload *payP;
+    class LinkedListNode2{
+    public:
+        LinkedListNode2* next;
+        LinkedListNode2* prev;
+        Payload2* payP;
+    };
+    class LinkedListNode{
+        public:
+                LinkedListNode* next;
+                LinkedListNode* prev;
+                Payload* payP;
     };
     typedef struct {
         Payload *mp;
-        LLNode *newQHead;
+        LinkedListNode *newQHead;
     } backFromDQFIFO;
     LinkedList();
     virtual ~LinkedList();
-    LLNode* makeEmptyLinkedList();
-    LLNode2* makeEmptyLinkedList2();
-    LLNode * removeFromList(LLNode *hp, Payload *pP);
-    void savePayload(LLNode *lp, Payload *mp);
-    void savePayload2(LLNode2 *lp, Payload2 *mp);
-    bool isEmpty(LLNode *lp);
-    bool isEmpty2(LLNode2 *lp);
-    Payload *dequeueLIFO(LLNode *lp);
-    backFromDQFIFO *dequeueFIFO(LLNode *lp);
-    void printHistory(LLNode2 *hp);
+    LinkedListNode* makeEmptyLinkedList();
+    LinkedListNode2* makeEmptyLinkedList2();
+    LinkedListNode * removeFromList(LinkedListNode *hp, Payload *pP);
+    void savePayload(LinkedListNode *lp, Payload *mp);
+    void savePayload2(LinkedListNode2 *lp, Payload2 *mp);
+    bool isEmpty(LinkedListNode *lp);
+    bool isEmpty2(LinkedListNode2 *lp);
+    Payload *dequeueLIFO(LinkedListNode *lp);
+    backFromDQFIFO *dequeueFIFO(LinkedListNode *lp);
+    void printHistory(LinkedListNode2 *hp);
 
 };
 

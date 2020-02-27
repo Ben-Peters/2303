@@ -10,7 +10,7 @@
     LinkedList::~LinkedList() {
 
 }
-    bool LinkedList::isEmpty(LLNode *lp) {
+    bool LinkedList::isEmpty(LinkedListNode *lp) {
         bool ans = false;
         if (lp->payP == (Payload *) 0) {
             ans = true;
@@ -18,7 +18,7 @@
         return ans;
     }
 
-    bool LinkedList::isEmpty2(LLNode2 *lp) {
+    bool LinkedList::isEmpty2(LinkedListNode2 *lp) {
         bool ans = false;
         if (lp->payP == (Payload2 *) 0) {
             ans = true;
@@ -26,26 +26,26 @@
         return ans;
     }
 
-    LinkedList::LLNode* makeEmptyLinkedList()
+    LinkedList::LinkedListNode* LinkedList::makeEmptyLinkedList()
     {
-        LLNode* lp = (LLNode*) malloc(sizeof(LLNode));
-        lp->next = (struct LLNode*)0;
-        lp->prev = (struct LLNode*)0;
+        LinkedListNode* lp = (LinkedListNode*) malloc(sizeof(LinkedListNode));
+        lp->next = (LinkedListNode*)0;
+        lp->prev = (LinkedListNode*)0;
         lp->payP = (Payload*)0;
 
         return lp;
     }
 
-    LLNode2* LinkedList::makeEmptyLinkedList2() {
-        LLNode2 *lp = (LLNode2 *) malloc(sizeof(LLNode2));
-        lp->next = (struct LLNode2 *) 0;
-        lp->prev = (struct LLNode2 *) 0;
+    LinkedList::LinkedListNode2* LinkedList::makeEmptyLinkedList2() {
+        LinkedListNode2 *lp = (LinkedListNode2 *) malloc(sizeof(LinkedListNode2));
+        lp->next = ( LinkedListNode2 *) 0;
+        lp->prev = ( LinkedListNode2 *) 0;
         lp->payP = (Payload2 *) 0;
 
         return lp;
     }
 
-    void LinkedList:: savePayload(LLNode *lp, Payload *mp) {
+    void LinkedList:: savePayload(LinkedListNode *lp, Payload *mp) {
         //if the list is empty, then make payP be mp
         //else traverse the list,
         //make a new list element
@@ -54,21 +54,21 @@
         if (isEmpty(lp)) {
             lp->payP = mp;
         } else {
-            LLNode *temp = lp;
+            LinkedListNode *temp = lp;
             while (temp->next) {
-                temp = (LLNode *) temp->next;
+                temp = (LinkedListNode *) temp->next;
             }
             //now temp points to the last element
 
             //make a new element, attach mp to it, wire up the new element
-            LLNode *newList = makeEmptyLinkedList();
+            LinkedListNode *newList = makeEmptyLinkedList();
             newList->payP = mp;
-            temp->next = (struct LLNode *) newList;
-            newList->prev = (struct LLNode *) temp;
+            temp->next = (LinkedListNode *) newList;
+            newList->prev = (LinkedListNode *) temp;
         }
     }
 
-    void LinkedList:: savePayload2(LLNode2 *lp, Payload2 *mp) {
+    void LinkedList:: savePayload2(LinkedListNode2 *lp, Payload2 *mp) {
         //if the list is empty, then make payP be mp
         //else traverse the list,
         //make a new list element
@@ -77,29 +77,29 @@
         if (isEmpty2(lp)) {
             lp->payP = mp;
         } else {
-            LLNode2 *temp = lp;
+            LinkedListNode2 *temp = lp;
             while (temp->next) {
-                temp = (LLNode2 *) temp->next;
+                temp = (LinkedListNode2 *) temp->next;
             }
             //now temp points to the last element
 
             //make a new element, attach mp to it, wire up the new element
-            LLNode2 *newList = makeEmptyLinkedList2();
+            LinkedListNode2 *newList = makeEmptyLinkedList2();
             newList->payP = mp;
-            temp->next = (struct LLNode2 *) newList;
-            newList->prev = (struct LLNode2 *) temp;
+            temp->next = (LinkedListNode2 *) newList;
+            newList->prev = (LinkedListNode2 *) temp;
         }
     }
 
-    LinkedList::Payload* LinkedList::dequeueLIFO(LLNode *lp) {
+    LinkedList::Payload* LinkedList::dequeueLIFO(LinkedListNode *lp) {
         Payload *payP = (Payload *) 0;
         if (isEmpty(lp)) {
             puts("Trying to dequeue from empty.");
         } else {
 
-            LLNode *temp = lp;
+            LinkedListNode *temp = lp;
             while (temp->next) {
-                temp = (LLNode *) temp->next;
+                temp = (LinkedListNode *) temp->next;
             }
             //now temp points to the last element
 
@@ -110,11 +110,11 @@
             fflush(stdout);
             //remove the last, now empty, element
             if (temp->prev) {
-                temp = (LLNode *) temp->prev;
+                temp = (LinkedListNode *) temp->prev;
                 //free(temp->next);
                 printf("end of queue is room %d\n", temp->payP->roomNumber);
                 fflush(stdout);
-                temp->next = (struct LLNode *) 0;
+                temp->next = (LinkedListNode *) 0;
             } else {
                 puts("Queue is now empty");
             }
@@ -125,13 +125,13 @@
         return payP;
     }
 
-   LinkedList::backFromDQFIFO* LinkedList::dequeueFIFO(LLNode *lp) {
+   LinkedList::backFromDQFIFO* LinkedList::dequeueFIFO(LinkedListNode *lp) {
         backFromDQFIFO *fp = (backFromDQFIFO *) malloc(sizeof(backFromDQFIFO));
-        if (lp->next == (struct LLNode *) 0) {
+        if (lp->next == (LinkedListNode *) 0) {
             //list of length 1 or 0
             fp->newQHead = lp;
         } else {
-            fp->newQHead = (LLNode *) lp->next;
+            fp->newQHead = (LinkedListNode *) lp->next;
         }
         fp->mp = lp->payP;//all return values are set
         if (lp->next != (struct LLNode *) 0) {
@@ -142,7 +142,7 @@
         return fp;
     }
 
-    void LinkedList::printHistory(LLNode2 *hp) {
+    void LinkedList::printHistory(LinkedListNode2 *hp) {
         puts("Printing history");
         if (hp->payP == (Payload2 *) 0) {
             puts("Empty list");
@@ -150,12 +150,12 @@
             //traverse the list, printing as we go
             float treasureSubtotal = 0.0;
             int room = -1;
-            LLNode2 *temp = hp;
+            LinkedListNode2 *temp = hp;
             while (temp->next) {
                 room = temp->payP->roomNumber;
                 treasureSubtotal += temp->payP->treasure;
                 printf("The room was %d, and the treasure subtotal was %f.\n", room, treasureSubtotal);
-                temp = (LLNode2 *) temp->next;
+                temp = (LinkedListNode2 *) temp->next;
 
             }
             room = temp->payP->roomNumber;
@@ -164,17 +164,17 @@
         }
     }
 
-    LinkedList::LLNode * LinkedList::removeFromList(LLNode *hP, Payload *pP) {
-        LLNode *retHead = hP;//only changes if first element gets removed
+    LinkedList::LinkedListNode * LinkedList::removeFromList(LinkedListNode *hP, Payload *pP) {
+        LinkedListNode *retHead = hP;//only changes if first element gets removed
         //find the payload
         //use the structure of a list, namely, list is empty or element followed by list
         if (isEmpty(hP)) {
             //nothing to do
         } else {
             //puts("list is not empty");fflush(stdout);
-            LLNode *altHead = (LLNode *) hP->next;
+            LinkedListNode *altHead = (LinkedListNode *) hP->next;
             //find the item, if it is there
-            LLNode *temp = hP;
+            LinkedListNode *temp = hP;
             bool done = false;
             while ((!done) && temp->next) {
                 //are we there yet?
@@ -182,7 +182,7 @@
                     done = true;
                     //puts("found it 1");fflush(stdout);
                 } else {
-                    temp = (LLNode *) temp->next;
+                    temp = (LinkedListNode *) temp->next;
                 }
             }
             //either we are pointing to the correct element, or we are at the end, or both
@@ -210,15 +210,15 @@
                     //found element has a prev
                     //participant before has a next
                     //participant after has a prev
-                    LLNode *prevPart = (LLNode *) temp->prev;//non-zero because not at first element
-                    LLNode *nextPart = (LLNode *) temp->next;//could be zero, if found at last element
-                    prevPart->next = (struct LLNode *) nextPart;//RHS is 0 if at end
+                    LinkedListNode *prevPart = (LinkedListNode *) temp->prev;//non-zero because not at first element
+                    LinkedListNode *nextPart = (LinkedListNode *) temp->next;//could be zero, if found at last element
+                    prevPart->next = (LinkedListNode *) nextPart;//RHS is 0 if at end
                     //puts("after setting the next of the previous");fflush(stdout);
                     // printf("Next is %p, %d\n", nextPart, (bool)nextPart);fflush(stdout);
                     if ((bool) nextPart)//don't need guarded block if element found at end of list
                     {
                         //puts("before setting the previous of the next");fflush(stdout);
-                        nextPart->prev = (struct LLNode *) prevPart;
+                        nextPart->prev = (LinkedListNode *) prevPart;
 
                     }
                     //puts("after handling the  previous of the next");fflush(stdout);
