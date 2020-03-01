@@ -7,7 +7,19 @@
 
 
 class King {
-
+private:
+    int row,col;
+    bool red;
+public:
+    King();
+    virtual ~King();
+    int getRow();
+    int getCol();
+    bool getRed();
+    void setRow(int);
+    void setCol(int);
+    void setRed(bool);
+    int* getAllPossibleMoves();
 };
 
 

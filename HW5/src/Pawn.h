@@ -7,7 +7,19 @@
 
 
 class Pawn {
-
+private:
+    int row,col;
+    bool red;
+public:
+    Pawn();
+    virtual ~Pawn();
+    int getRow();
+    int getCol();
+    bool getRed();
+    void setRow(int);
+    void setCol(int);
+    void setRed(bool);
+    int* getAllPossibleMoves();
 };
 
 
