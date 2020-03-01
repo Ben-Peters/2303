@@ -271,12 +271,15 @@ bool Tests::testPrintHistory()
     LinkedList::LinkedListNode2* list = LinkedList::makeEmptyLinkedList2();
     LinkedList::Payload2* pay = (LinkedList::Payload2*) malloc(sizeof(Room));
     pay->roomNumber = 1;
+    pay->treasure =4.6;
     LinkedList::savePayload2(list, pay);
 
     LinkedList::printHistory(list);
 
-    int roomAnswer = 0;
-    double treasAnswer = -1;
+    int* roomAnswer = (int*) malloc(sizeof(int));
+    *roomAnswer = 0;
+    double *treasAnswer = (double*) malloc(sizeof(double));
+    *treasAnswer = -1;
     int rightRoom = 1;
     double rightAmountTreasure = 4.6;
 
@@ -284,8 +287,9 @@ bool Tests::testPrintHistory()
     fscanf(fp, "%d", roomAnswer);
     fscanf(fp, "%lf", treasAnswer);
 
-    if (roomAnswer == rightRoom && treasAnswer == rightAmountTreasure){
+    if (*roomAnswer == rightRoom && *treasAnswer == rightAmountTreasure){
         ok = true;
+        puts("Pass: Print to File worked");
     }else{
         puts("Fail: Was unable to write history to file");
     }
