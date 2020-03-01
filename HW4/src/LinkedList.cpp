@@ -144,7 +144,7 @@
 
     void LinkedList::printHistory(LinkedListNode2 *hp) {
         ofstream fileOut;
-        fileOut.open("output.txt");
+        fileOut.open("../output.txt");
         puts("Printing history");
         if (hp->payP == (Payload2 *) 0) {
             fileOut<<("Empty list\n");

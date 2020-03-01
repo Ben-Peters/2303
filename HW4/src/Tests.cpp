@@ -265,24 +265,32 @@ bool Tests::testRemoveFromList()
 bool Tests::testPrintHistory()
 {
     bool ok = false;
+
+    cout << "testing output file"<<endl; fflush(stdout);
+
     LinkedList::LinkedListNode2* list = LinkedList::makeEmptyLinkedList2();
-    LinkedList::SearchResults* srP = (LinkedList::SearchResults*) malloc(sizeof(LinkedList::SearchResults));
-    srP->roomNumber= 1;
-    srP->treasure = 1.25;
-    LinkedList::savePayload2(list, srP);
+    LinkedList::Payload2* pay = (LinkedList::Payload2*) malloc(sizeof(Room));
+    pay->roomNumber = 1;
+    LinkedList::savePayload2(list, pay);
+
     LinkedList::printHistory(list);
-    cout <<("Is the last line printed \"The room was 1, and the treasure subtotal was 1.250000.\" (y/n)")<<endl;
-    char input;
-    scanf("%c",&input);
-    if(input == 'y'){
+
+    int roomAnswer = 0;
+    double treasAnswer = -1;
+    int rightRoom = 1;
+    double rightAmountTreasure = 4.6;
+
+    FILE* fp = fopen("../output.txt", "r");
+    fscanf(fp, "%d", roomAnswer);
+    fscanf(fp, "%lf", treasAnswer);
+
+    if (roomAnswer == rightRoom && treasAnswer == rightAmountTreasure){
         ok = true;
+    }else{
+        puts("Fail: Was unable to write history to file");
     }
-    if(ok){
-        cout <<("Pass: testPrintHistory")<<endl;
-    }
-    else{
-        cout <<("Fail: testPrintHistory")<<endl;
-    }
+
+    //fclose("../output.txt");
     return ok;
 }
 
