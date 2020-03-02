@@ -12,6 +12,7 @@ private:
     bool red;
 public:
     Pawn();
+    Pawn(bool, int, int);
     virtual ~Pawn();
     int getRow();
     int getCol();
