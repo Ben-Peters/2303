@@ -4,16 +4,19 @@
 
 #ifndef HW5_PAWN_H
 #define HW5_PAWN_H
+
 #include "CheckerPiece.h"
 
 class Pawn : public CheckerPiece {
 private:
-    int row,col;
+    int row, col;
     bool red;
 public:
-    Pawn();
+    Pawn(int row, int col, bool red);
+
     virtual ~Pawn();
-    CheckerPiece* getAllPossibleMoves();
+
+    CheckerPiece::PossibleMove *getAllPossibleMoves(CheckerPiece *);
 };
 
 #endif //HW5_PAWN_H

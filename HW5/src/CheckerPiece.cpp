@@ -3,7 +3,12 @@
 //
 
 #include "CheckerPiece.h"
-CheckerPiece::CheckerPiece() {}
+
+CheckerPiece::CheckerPiece(int row, int col, bool red) {
+    this->row = row;
+    this->col = col;
+    this->red = red;
+}
 
 CheckerPiece::~CheckerPiece() {}
 
@@ -31,6 +36,6 @@ void CheckerPiece::setRed(bool value) {
     red = value;
 }
 
-CheckerPiece *CheckerPiece::getAllPossibleMoves(){
-    return this;
+CheckerPiece::PossibleMove *getAllPossibleMoves(CheckerPiece *board) {
+    return nullptr;
 }

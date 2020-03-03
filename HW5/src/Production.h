@@ -18,6 +18,8 @@ public:
 	virtual ~Production();
 	bool prod(int argc, char* argv[]);
     int promptNumOfMoves();
+    void initBoard(CheckerPiece*&);
+    static void makeMove(CheckerPiece::PossibleMove*);
 };
 
 #endif /* PRODUCTION_H_ */

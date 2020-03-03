@@ -6,13 +6,25 @@
 #define HW5_CHECKERPIECE_H
 
 
+#include "Pawn.h"
+#include "King.h"
+
 class CheckerPiece {
 private:
     int row;
     int col;
     bool red;
 public:
-    CheckerPiece();
+    typedef struct{
+        CheckerPiece* newPiece;
+        bool jump;
+        int numJumped;
+        CheckerPiece* jumped;
+        bool king;
+    }PossibleMove;
+    CheckerPiece(int,int,bool);
+    CheckerPiece(Pawn *pPawn);
+    CheckerPiece(King *pKing);
     virtual ~CheckerPiece();
     int getRow();
     int getCol();
@@ -20,7 +32,8 @@ public:
     void setRow(int);
     void setCol(int);
     void setRed(bool);
-    CheckerPiece* getAllPossibleMoves();
+
+    PossibleMove *getAllPossibleMoves(CheckerPiece *);
 };
 
 

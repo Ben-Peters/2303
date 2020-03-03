@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include<iostream>
 #include<cstring>
+#include <time.h>
 
 using namespace std;
 
@@ -105,8 +106,29 @@ bool Production::prod(int argc, char *argv[]) {
         fflush(stdout);
         */
 
-        CheckerPiece* board = (CheckerPiece*) malloc(sizeof(CheckerPiece)*BOARD_SIZE*BOARD_SIZE);
+        CheckerPiece* allPieces = (CheckerPiece*) malloc(sizeof(CheckerPiece)*24);
+        initBoard(allPieces);
 
+
+        for(int i = 0; i < numMoves; i++){
+            CheckerPiece::PossibleMove** possibleMoves;
+            possibleMoves = (CheckerPiece::PossibleMove**) malloc(24*sizeof(malloc(4*sizeof(possibleMoves))));
+            for(int j =0; j < 24; j++){
+                CheckerPiece::PossibleMove* tempPossibleMoves =(allPieces+j)->getAllPossibleMoves(allPieces);
+                    *(possibleMoves+j) = tempPossibleMoves;
+                }
+            bool madeMove = false;
+            srand(time(0));
+            while(!madeMove){
+                int pieceMoved = rand()%24;
+                if((*(possibleMoves+(pieceMoved)))-> newPiece != nullptr){
+                    makeMove(*(possibleMoves+(pieceMoved)));
+                    madeMove=true;
+                }
+            }
+        }
+        }
+        /*
         //we'll want to conduct the search
         //for the search we'll need an empty search history
         LinkedList::LinkedListNode2 *historyP = LinkedList::makeEmptyLinkedList2();
@@ -192,7 +214,21 @@ bool Production::prod(int argc, char *argv[]) {
 
 
     }//end of else we have good arguments
+*/
     return answer;
+}
+
+void initBoard(CheckerPiece*&pieces){
+    for(int i  = 0; i < 3; i ++){
+        for(int j = 0; j < 4; j++){
+            *(pieces + (i*4) + j) = new Pawn(i, (2*j)+((i+1)%2), false);
+        }
+    }
+    for(int i  = 0; i < 3; i ++){
+        for(int j = 0; j < 4; j++){
+            *(pieces + (i*4) + j) = new Pawn(i+5, (2*j)+(i%2), true);
+        }
+    }
 }
 
 int Production::promptNumOfMoves() {
@@ -200,4 +236,8 @@ int Production::promptNumOfMoves() {
     printf("Enter the number of moves to make: ");
     scanf("%d", &moves);
     return moves;
+}
+
+void MakeMove(CheckerPiece::PossibleMove* move){
+
 }
