@@ -7,37 +7,13 @@
 Pawn::Pawn() {}
 
 Pawn::Pawn(bool isRed, int irow, int icol) {
-	red = isRed;
-	col = icol;
-	row = irow;
+    red = isRed;
+    col = icol;
+    row = irow;
 }
 
 Pawn::~Pawn() {}
 
-int Pawn::getRow() {
-    return row;
-}
-
-int Pawn::getCol() {
-    return col;
-}
-
-bool Pawn::getRed() {
-    return red;
-}
-
-void Pawn::setRow(int value) {
-    row = value;
-}
-
-void Pawn::setCol(int value) {
-    col = value;
-}
-
-void Pawn::setRed(bool value) {
-    red = value;
-}
-
-int *Pawn::getAllPossibleMoves(){
-    return &row;
+CheckerPiece *Pawn::getAllPossibleMoves() {
+    return this;
 }

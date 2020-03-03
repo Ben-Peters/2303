@@ -4,22 +4,16 @@
 
 #ifndef HW5_KING_H
 #define HW5_KING_H
+#include "CheckerPiece.h"
 
-
-class King {
+class King : public CheckerPiece{
 private:
     int row,col;
     bool red;
 public:
     King();
     virtual ~King();
-    int getRow();
-    int getCol();
-    bool getRed();
-    void setRow(int);
-    void setCol(int);
-    void setRed(bool);
-    int* getAllPossibleMoves();
+    CheckerPiece* getAllPossibleMoves();
 };
 
 
