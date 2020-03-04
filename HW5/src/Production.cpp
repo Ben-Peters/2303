@@ -94,22 +94,18 @@ bool Production::prod(int argc, char *argv[]) {
 
 
         //we'll want to read the file
-        /*int nrooms = -1;
-        AdjMatrix::AdjMat *adjMP = (AdjMatrix::AdjMat *) malloc(sizeof(AdjMatrix::AdjMat));
+        //int nrooms = -1;
+        //AdjMatrix::AdjMat *adjMP = (AdjMatrix::AdjMat *) malloc(sizeof(AdjMatrix::AdjMat));
         //cannot, do not know nrooms init(adjMP);
         //cout <<("Back from init Adj Mat"); fflush(stdout);
-        Room *theRoomPs[10];//addresses for 10 rooms
+        //Room *theRoomPs[10];//addresses for 10 rooms
 
-        cout << ("Before read file") << endl;
-        fflush(stdout);
-        answer = readFile(filename, &nrooms, adjMP, theRoomPs); //read the file
-        cout << ("Back from read file") << endl;
-        fflush(stdout);
-        */
 
         CheckerPiece *allPieces = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
         initBoard(allPieces);
-
+        cout << ("Before read file") << endl;
+        answer = readFile(filename, allPieces); //read the file
+        cout << ("Back from read file") << endl;
 
         for (int i = 0; i < numMoves; i++) {
             int maxPiece = 12;
@@ -225,6 +221,62 @@ bool Production::prod(int argc, char *argv[]) {
 }//end of else we have good arguments
 */
     return answer;
+}
+
+bool readFile(char* filename, CheckerPiece *&pieces){
+        bool ok = false;
+        //the file tells how many rooms there are
+        FILE* fp = fopen(filename, "r"); //read the file
+
+        if (fp == NULL)
+        {
+            cout <<("Error! opening file")<<endl;
+
+        }
+        else
+        {
+            fscanf(fp,"%d", );
+            adjMP->n=*nrooms;
+            int howManyRooms = *nrooms;
+            adjMP->edgesP = (int*) malloc(howManyRooms * howManyRooms *sizeof(int));
+            cout <<("Before init Adj Mat")<<endl; fflush(stdout);
+            AdjMatrix::init(adjMP);
+            int temp = -1;
+            for(int roomr = 1; roomr<*nrooms; roomr++)
+            {
+                printf("on row %d\n", roomr);fflush(stdout);
+                for(int roomc = 0; roomc<roomr; roomc++)
+                {
+                    fscanf(fp,"%d", &temp);
+                    printf("in column %d, read %d\n", roomc, temp);fflush(stdout);
+                    //now set the value in the adjacency matrix
+                    if(temp==1)
+                    {
+                        AdjMatrix::setEdge(adjMP, roomr, roomc);
+                    }
+
+                }
+            }
+
+            float tempTreas = 2.9;
+            for(int roomr = 0; roomr<*nrooms; roomr++)
+            {
+                fscanf(fp,"%f", &tempTreas);
+                //make a room and set its treasure
+                Room** aRoomP = theRoomPs;
+                aRoomP = aRoomP+roomr;
+                *aRoomP = (Room*) malloc(sizeof(Room));
+                //now set the treasures
+                (*aRoomP)->treasure = tempTreas;
+                (*aRoomP)->roomNumber = roomr;
+                printf("The treasure in room %d is %f\n", roomr, (*aRoomP)->treasure);
+            }
+            ok = true;
+        }
+        fclose(fp);
+
+        return ok;
+
 }
 
 void initBoard(CheckerPiece *&pieces) {
