@@ -40,6 +40,10 @@ void CheckerPiece::setRed(bool value) {
     red = value;
 }
 
+CheckerPiece::PossibleMove* CheckerPiece::getAllPossibleMoves(CheckerPiece *) {
+return nullptr;
+}
+
 CheckerPiece::CheckerPiece(Pawn *pPawn) {
 
 }

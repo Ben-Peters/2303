@@ -199,6 +199,6 @@ int Production::promptNumOfMoves() {
     return moves;
 }
 
-void MakeMove(CheckerPiece::PossibleMove *move) {
+void Production::makeMove(CheckerPiece::PossibleMove *move) {
 
 }
