@@ -32,7 +32,7 @@ bool Tests::testReadFile() {
     CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 4; j++) {
-            *(rightAnswer + (i * 4) + j) = new Pawn(i, (2 * j) + ((i + 1) % 2), false);
+            *(rightAnswer + (i * 4) + j) =  new Pawn(i, (2 * j) + ((i + 1) % 2), false);
         }
     }
     for (int i = 0; i < 3; i++) {

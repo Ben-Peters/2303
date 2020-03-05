@@ -36,6 +36,30 @@ void CheckerPiece::setRed(bool value) {
     red = value;
 }
 
-CheckerPiece::PossibleMove *getAllPossibleMoves(CheckerPiece *board) {
+CheckerPiece::CheckerPiece(Pawn *pPawn) {
+
+}
+
+King::King(int row, int col, bool red) : CheckerPiece(row, col, red) {
+    this->row = row;
+    this->col = col;
+    this->red = red;
+}
+
+King::~King() {}
+
+CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *) {
+    return nullptr;
+}
+
+Pawn::Pawn(int row, int col, bool red) : CheckerPiece(row, col, red) {
+    this->row = row;
+    this->col = col;
+    this->red = red;
+}
+
+Pawn::~Pawn() {}
+
+CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *board) {
     return nullptr;
 }
