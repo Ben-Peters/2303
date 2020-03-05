@@ -103,6 +103,8 @@ bool Production::prod(int argc, char *argv[]) {
         simplePrint(allPieces);
 
         for (int i = 0; i < numMoves; i++) {
+            cout<< "Current Board:" << endl;
+            simplePrint(allPieces);
             int maxPiece = 12;
             int minPiece = 0;
             if (redTurn) {

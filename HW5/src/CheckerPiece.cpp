@@ -66,6 +66,72 @@ CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
     *noMove->newPiece = nullptr;
+    for(int l = 1; l >=-1; l += -2) {
+        for (int i = -1; i <= 1; i += 2) {
+            for (int j = 0; j < 24; j++) {
+                if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
+                    this->red == (pieces + j)->getRed()) {
+                    //same place same team
+                    *(possibleMoves + k++) = *noMove;
+                } else if (this->row + l != (pieces + j)->getRow() && this->col + i != (pieces + j)->getCol() &&
+                           (this->row + l < 8 && this->col + i < 8 && this->col + i > -l)) {
+                    //valid move with no jump or anything like that
+                    CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
+                    move->newPiece = new King(this->row + l, this->col + i, this->red);
+                    move->jump = false;
+                    move->numJumped = -1;
+                    move->king = false;
+                    *(possibleMoves + k++) = *move;
+                    free(move);
+                } else if (this->row + l == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
+                           this->red != (pieces + j)->getRed()) {
+                    //same space different team with +/-1(Possible jump)
+                    if ((this->row == 6 && !(this->red)) || (this->row == 1 && (this->red))) {
+                        //jump would be off the board
+                        *(possibleMoves + k++) = *noMove;
+                    } else if (((this->row == 5 && !(this->red)) || (this->row == 2 && (this->red))) &&
+                               (this->col + (i * 2) <= 7 && this->col + (i * 2) >= 0)) {
+                        //valid jump into king but that doesnt matter because its a king already
+                        CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
+                        move->newPiece = new King(this->row + (l*2), this->col + (2 * i), this->red);
+                        move->jump = true;
+                        move->numJumped = j;
+                        move->king = false;
+                        *(possibleMoves + k++) = *move;
+                        free(move);
+                    } else {
+                        //valid jump but not a king
+                        CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
+                        move->newPiece = new King(this->row + (l*2), this->col + (2 * i), this->red);
+                        move->jump = true;
+                        move->numJumped = j;
+                        move->king = false;
+                        *(possibleMoves + k++) = *move;
+                        free(move);
+                    }
+                } else {
+                    *(possibleMoves + k++) = *noMove;
+                }
+            }
+        }
+    }
+    free(noMove);
+    return possibleMoves;
+}
+
+Pawn::Pawn(int row, int col, bool red) : CheckerPiece(row, col, red) {
+    this->row = row;
+    this->col = col;
+    this->red = red;
+}
+
+Pawn::~Pawn() {}
+
+CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
+    CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
+    int k = 0;
+    CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
+    *noMove->newPiece = nullptr;
     for (int i = -1; i <= 1; i += 2) {
         for (int j = 0; j < 24; j++) {
             if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
@@ -76,7 +142,7 @@ CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
                        (this->row + 1 < 8 && this->col + i < 8 && this->col + i > -1)) {
                 //valid move with no jump or anything like that
                 CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-                move->newPiece = new(Pawn(this->row + 1, this->col +  i, this->red));
+                move->newPiece = new Pawn(this->row + 1, this->col + i, this->red);
                 move->jump = false;
                 move->numJumped = -1;
                 move->king = false;
@@ -92,7 +158,7 @@ CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
                            (this->col + (i * 2) <= 7 && this->col + (i * 2) >= 0)) {
                     //valid jump into king
                     CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-                    move->newPiece = new(King(this->row + 2, this->col + (2 * i), this->red));
+                    move->newPiece = new King(this->row + (1*2), this->col + (2 * i), this->red);
                     move->jump = true;
                     move->numJumped = j;
                     move->king = true;
@@ -101,29 +167,18 @@ CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
                 } else {
                     //valid jump but not a king
                     CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-                    move->newPiece = new(Pawn(this->row + 2, this->col + (2 * i), this->red));
+                    move->newPiece = new Pawn(this->row + (1*2), this->col + (2 * i), this->red);
                     move->jump = true;
                     move->numJumped = j;
                     move->king = false;
                     *(possibleMoves + k++) = *move;
                     free(move);
                 }
+            } else {
+                *(possibleMoves + k++) = *noMove;
             }
         }
     }
-
-
-    return nullptr;
-}
-
-Pawn::Pawn(int row, int col, bool red) : CheckerPiece(row, col, red) {
-    this->row = row;
-    this->col = col;
-    this->red = red;
-}
-
-Pawn::~Pawn() {}
-
-CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *board) {
-    return nullptr;
+    free(noMove);
+    return possibleMoves;
 }
