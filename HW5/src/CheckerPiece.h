@@ -18,6 +18,7 @@ private:
     int row;
     int col;
     bool red;
+    bool pawn;
 public:
 
     typedef struct{
@@ -32,6 +33,7 @@ public:
     int getRow();
     int getCol();
     bool getRed();
+    bool getPawn();
     void setRow(int);
     void setCol(int);
     void setRed(bool);
@@ -42,24 +44,23 @@ public:
 class Pawn : public CheckerPiece{
 private:
     int row, col;
-    bool red;
+    bool red, pawn;
 public:
     Pawn(int row, int col, bool red);
-
     virtual ~Pawn();
-
+    bool getPawn();
     CheckerPiece::PossibleMove *getAllPossibleMoves(CheckerPiece *);
 };
 
 class King : public CheckerPiece{
 private:
     int row, col;
-    bool red;
+    bool red,pawn;
 public:
     King(int, int, bool);
 
     virtual ~King();
-
+    bool getPawn();
     CheckerPiece::PossibleMove *getAllPossibleMoves(CheckerPiece *);
 };
 

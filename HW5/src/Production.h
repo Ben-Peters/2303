@@ -10,8 +10,6 @@
 #define BOARD_SIZE 8
 
 #include "CheckerPiece.h"
-#include "Pawn.h"
-#include "King.h"
 class Production {
 public:
 	Production();

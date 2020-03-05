@@ -24,6 +24,10 @@ bool CheckerPiece::getRed() {
     return red;
 }
 
+bool CheckerPiece::getPawn() {
+    return pawn;
+}
+
 void CheckerPiece::setRow(int value) {
     row = value;
 }
@@ -44,6 +48,7 @@ King::King(int row, int col, bool red) : CheckerPiece(row, col, red) {
     this->row = row;
     this->col = col;
     this->red = red;
+    this->pawn = false;
 }
 
 King::~King() {}
