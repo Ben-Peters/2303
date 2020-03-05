@@ -48,6 +48,10 @@ CheckerPiece::CheckerPiece(Pawn *pPawn) {
 
 }
 
+CheckerPiece::PossibleMove *CheckerPiece::getAllPossibleMoves(CheckerPiece *) {
+    return nullptr;
+}
+
 King::King(int row, int col, bool red) : CheckerPiece(row, col, red) {
     this->row = row;
     this->col = col;
