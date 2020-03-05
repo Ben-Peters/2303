@@ -111,8 +111,15 @@ bool Production::prod(int argc, char *argv[]) {
             }
             CheckerPiece::PossibleMove **possibleMoves;
             possibleMoves = (CheckerPiece::PossibleMove **) malloc(12 * sizeof(malloc(4 * sizeof(possibleMoves))));
+            CheckerPiece::PossibleMove *tempPossibleMoves = (CheckerPiece::PossibleMove*) malloc(sizeof(possibleMoves)*4);
             for (int j = minPiece; j < maxPiece; j++) {
-                CheckerPiece::PossibleMove *tempPossibleMoves = (allPieces + j)->getAllPossibleMoves(allPieces);
+                if((allPieces+j)->getPawn()){
+                    Pawn* pawn = (Pawn*) (allPieces+j);
+                    tempPossibleMoves = pawn->getAllPossibleMoves(allPieces);
+                }else{
+                    King* king = (King*) (allPieces+j);
+                    tempPossibleMoves = king->getAllPossibleMoves(allPieces);
+                }
                 *(possibleMoves + j) = tempPossibleMoves;
             }
             bool madeMove = false;
