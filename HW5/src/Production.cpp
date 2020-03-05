@@ -206,8 +206,8 @@ void Production::makeMove(CheckerPiece::PossibleMove *move) {
 
 }
 
-void Production::simplePrint(CheckerPiece* pieces){
-    for(int i = 0; i < 24; i ++){
-        cout << (pieces+i) -> getRow() << " " << (pieces+i) -> getCol() << " " << (pieces+i) -> getRed() << endl;
+void Production::simplePrint(CheckerPiece* pieces) {
+    for (int i = 0; i < 24; i++) {
+        cout << (pieces + i)->getRow() << " " << (pieces + i)->getCol() << " " << (pieces + i)->getRed() << endl;
     }
 }
