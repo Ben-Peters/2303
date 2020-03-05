@@ -62,19 +62,12 @@ bool Production::prod(int argc, char *argv[]) {
                     }
                     break;
                 case 2:
-                    //this is maximum number of rooms
+                    //this is maximum number of moves
 
                     aL = strtol(argv[i], &eptr, 10);
                     numMoves = (int) aL;
                     printf("Number of moves is %d\n", numMoves);
                     fflush(stdout);
-                    break;
-                case 3:
-                    //this is maximum amount of treasure
-
-                    //maxTreas = atof(argv[i]);
-                    //printf("Amount of  treasure is %f\n",maxTreas);fflush(stdout);
-                    //maxTreasure = (float) maxTreas;
                     break;
 
                 default:
@@ -106,6 +99,8 @@ bool Production::prod(int argc, char *argv[]) {
         cout << ("Before read file") << endl;
         answer = readFile(filename, allPieces, redTurn); //read the file
         cout << ("Back from read file") << endl;
+        cout << "The board:"<< endl;
+        simplePrint(allPieces);
 
         for (int i = 0; i < numMoves; i++) {
             int maxPiece = 12;
