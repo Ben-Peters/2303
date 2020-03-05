@@ -32,11 +32,11 @@ bool Tests::testReadFile() {
     bool ok = true;
     CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     Production::initBoard(rightAnswer);
-    Production::simplePrint(rightAnswer);
+    //Production::simplePrint(rightAnswer);
     CheckerPiece *trial = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     bool redTurn;
     Production::readFile("../test.txt", trial, redTurn);
-    Production::simplePrint(trial);
+    //Production::simplePrint(trial);
     for(int i = 0; i < 24; i++){
         if(!(rightAnswer[i].getRow() == trial[i].getRow() && rightAnswer[i].getCol() == trial[i].getCol() && rightAnswer[i].getRed() == trial[i].getRed())){
             ok = false;

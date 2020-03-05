@@ -158,7 +158,7 @@ bool Production::readFile(char* filename, CheckerPiece *&pieces, bool &redTurn){
                 fscanf(fp, "%d", col);
                 fscanf(fp, "%c", team);
                 bool red = *team == 'r';
-                cout<< *row << ", " << *col <<", "<< *team<< endl;
+                //cout<< *row << ", " << *col <<", "<< *team<< endl;
                 *(pieces+i) = new Pawn(*row,*col,red);
             }
             char *turn = (char*) malloc(sizeof(char));
@@ -167,8 +167,9 @@ bool Production::readFile(char* filename, CheckerPiece *&pieces, bool &redTurn){
             bool valid= true;
             for(int i = 0; i < 24; i++){
                 for(int j = 0; j < 24; j++){
-                    if(((pieces+i)->getRow() == (pieces+j)->getRow() && (pieces+i)->getCol() == (pieces+j)->getCol()) || (pieces+i)->getRow()%2 == (pieces+i)->getCol()%2)
+                    if((((pieces+i)->getRow() == (pieces+j)->getRow() && (pieces+i)->getCol() == (pieces+j)->getCol()) || (pieces+i)->getRow()%2 == (pieces+i)->getCol()%2) && i != j)
                     {
+                        cout <<((pieces+i)->getRow() == (pieces+j)->getRow() && (pieces+i)->getCol() == (pieces+j)->getCol())<< " " <<i <<" " << j <<endl;
                         valid = false;
                         cout<<"Oops! It looks like you gave an invalid configuration in your starter file."<<endl;
                     }
