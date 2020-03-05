@@ -154,9 +154,12 @@ bool Production::readFile(char* filename, CheckerPiece *&pieces, bool &redTurn){
             for(int i = 0; i < 24; i++) {
                 fscanf(fp, "%d", row);
                 fscanf(fp, "%d", col);
+                fscanf(fp, "%d", row);
+                fscanf(fp, "%d", col);
                 fscanf(fp, "%c", team);
                 bool red = *team == 'r';
-                pieces[i] = new Pawn(*row,*col,red);
+                cout<< *row << ", " << *col <<", "<< *team<< endl;
+                *(pieces+i) = new Pawn(*row,*col,red);
             }
             char *turn = (char*) malloc(sizeof(char));
             fscanf(fp, "%s", turn);
@@ -164,7 +167,7 @@ bool Production::readFile(char* filename, CheckerPiece *&pieces, bool &redTurn){
             bool valid= true;
             for(int i = 0; i < 24; i++){
                 for(int j = 0; j < 24; j++){
-                    if((pieces[i].getRow() == pieces[j].getRow() && pieces[i].getCol() == pieces[j].getCol()) || pieces[i].getRow()%2 == pieces[i].getCol()%2)
+                    if(((pieces+i)->getRow() == (pieces+j)->getRow() && (pieces+i)->getCol() == (pieces+j)->getCol()) || (pieces+i)->getRow()%2 == (pieces+i)->getCol()%2)
                     {
                         valid = false;
                         cout<<"Oops! It looks like you gave an invalid configuration in your starter file."<<endl;
@@ -179,7 +182,7 @@ bool Production::readFile(char* filename, CheckerPiece *&pieces, bool &redTurn){
 
 }
 
-void initBoard(CheckerPiece *&pieces) {
+void Production::initBoard(CheckerPiece *&pieces) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 4; j++) {
             *(pieces + (i * 4) + j) = new Pawn(i, (2 * j) + ((i + 1) % 2), false);
@@ -187,7 +190,7 @@ void initBoard(CheckerPiece *&pieces) {
     }
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 4; j++) {
-            *(pieces + (i * 4) + j) = new Pawn(i + 5, (2 * j) + (i % 2), true);
+            *(pieces +12+ (i * 4) + j) = new Pawn(i + 5, (2 * j) + (i % 2), true);
         }
     }
 }
@@ -201,4 +204,10 @@ int Production::promptNumOfMoves() {
 
 void Production::makeMove(CheckerPiece::PossibleMove *move) {
 
+}
+
+void Production::simplePrint(CheckerPiece* pieces){
+    for(int i = 0; i < 24; i ++){
+        cout << (pieces+i) -> getRow() << " " << (pieces+i) -> getCol() << " " << (pieces+i) -> getRed() << endl;
+    }
 }

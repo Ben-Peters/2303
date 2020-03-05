@@ -16,9 +16,10 @@ public:
 	virtual ~Production();
 	bool prod(int argc, char* argv[]);
     int promptNumOfMoves();
-    void initBoard(CheckerPiece*&);
+    static void initBoard(CheckerPiece*&);
 	static bool readFile(char* filename, CheckerPiece *&pieces, bool &redTurn);
     static void makeMove(CheckerPiece::PossibleMove*);
+    static void simplePrint(CheckerPiece*);
 };
 
 #endif /* PRODUCTION_H_ */

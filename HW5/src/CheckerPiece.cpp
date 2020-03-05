@@ -41,7 +41,10 @@ void CheckerPiece::setRed(bool value) {
 }
 
 CheckerPiece::CheckerPiece(Pawn *pPawn) {
-
+    row = pPawn->getRow();
+    col = pPawn->getCol();
+    red = pPawn->getRed();
+    pawn = true;
 }
 
 CheckerPiece::PossibleMove *CheckerPiece::getAllPossibleMoves(CheckerPiece *) {
