@@ -102,7 +102,7 @@ bool Production::prod(int argc, char *argv[]) {
 
 
         CheckerPiece *allPieces = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
-        initBoard(allPieces);
+        //initBoard(allPieces);
         cout << ("Before read file") << endl;
         answer = readFile(filename, allPieces, redTurn); //read the file
         cout << ("Back from read file") << endl;
