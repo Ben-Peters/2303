@@ -19,6 +19,7 @@ public:
 	bool prod(int argc, char* argv[]);
     int promptNumOfMoves();
     void initBoard(CheckerPiece*&);
+	static bool readFile(char* filename, CheckerPiece *&pieces, bool &redTurn);
     static void makeMove(CheckerPiece::PossibleMove*);
 };
 

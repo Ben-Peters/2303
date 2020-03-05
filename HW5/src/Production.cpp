@@ -104,7 +104,7 @@ bool Production::prod(int argc, char *argv[]) {
         CheckerPiece *allPieces = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
         initBoard(allPieces);
         cout << ("Before read file") << endl;
-        answer = readFile(filename, allPieces); //read the file
+        answer = readFile(filename, allPieces, redTurn); //read the file
         cout << ("Back from read file") << endl;
 
         for (int i = 0; i < numMoves; i++) {
@@ -223,7 +223,7 @@ bool Production::prod(int argc, char *argv[]) {
     return answer;
 }
 
-bool readFile(char* filename, CheckerPiece *&pieces){
+bool Production::readFile(char* filename, CheckerPiece *&pieces, bool &redTurn){
         bool ok = false;
         //the file tells how many rooms there are
         FILE* fp = fopen(filename, "r"); //read the file
@@ -235,43 +235,30 @@ bool readFile(char* filename, CheckerPiece *&pieces){
         }
         else
         {
-            fscanf(fp,"%d", );
-            adjMP->n=*nrooms;
-            int howManyRooms = *nrooms;
-            adjMP->edgesP = (int*) malloc(howManyRooms * howManyRooms *sizeof(int));
-            cout <<("Before init Adj Mat")<<endl; fflush(stdout);
-            AdjMatrix::init(adjMP);
-            int temp = -1;
-            for(int roomr = 1; roomr<*nrooms; roomr++)
-            {
-                printf("on row %d\n", roomr);fflush(stdout);
-                for(int roomc = 0; roomc<roomr; roomc++)
-                {
-                    fscanf(fp,"%d", &temp);
-                    printf("in column %d, read %d\n", roomc, temp);fflush(stdout);
-                    //now set the value in the adjacency matrix
-                    if(temp==1)
+            int *row = (int*) malloc(sizeof(int));
+            int *col = (int*) malloc(sizeof(int));
+            char *team = (char*) malloc(sizeof(char));
+            for(int i = 0; i < 24; i++) {
+                fscanf(fp, "%d", row);
+                fscanf(fp, "%d", col);
+                fscanf(fp, "%c", team);
+                bool red = *team == 'r';
+                pieces[i] = new Pawn(*row,*col,red);
+            }
+            char *turn = (char*) malloc(sizeof(char));
+            fscanf(fp, "%s", turn);
+            redTurn = strncmp(turn, "red",3) == 0;
+            bool valid= true;
+            for(int i = 0; i < 24; i++){
+                for(int j = 0; j < 24; j++){
+                    if((pieces[i].getRow() == pieces[j].getRow() && pieces[i].getCol() == pieces[j].getCol()) || pieces[i].getRow()%2 == pieces[i].getCol()%2)
                     {
-                        AdjMatrix::setEdge(adjMP, roomr, roomc);
+                        valid = false;
+                        cout<<"Oops! It looks like you gave an invalid configuration in your starter file."<<endl;
                     }
-
                 }
             }
-
-            float tempTreas = 2.9;
-            for(int roomr = 0; roomr<*nrooms; roomr++)
-            {
-                fscanf(fp,"%f", &tempTreas);
-                //make a room and set its treasure
-                Room** aRoomP = theRoomPs;
-                aRoomP = aRoomP+roomr;
-                *aRoomP = (Room*) malloc(sizeof(Room));
-                //now set the treasures
-                (*aRoomP)->treasure = tempTreas;
-                (*aRoomP)->roomNumber = roomr;
-                printf("The treasure in room %d is %f\n", roomr, (*aRoomP)->treasure);
-            }
-            ok = true;
+            ok = valid;
         }
         fclose(fp);
 

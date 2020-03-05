@@ -1,7 +1,7 @@
 //
 // Created by Ben on 2/29/2020.
 //
-
+#include "CheckerPiece.h"
 #include "King.h"
 
 King::King(int row, int col, bool red) : CheckerPiece(row, col, red) {

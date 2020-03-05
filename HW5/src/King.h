@@ -6,8 +6,9 @@
 #define HW5_KING_H
 
 #include "CheckerPiece.h"
+#include "CheckerPiece.cpp"
 
-class King : public CheckerPiece {
+class King : public CheckerPiece{
 private:
     int row, col;
     bool red;

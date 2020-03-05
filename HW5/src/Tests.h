@@ -8,11 +8,14 @@
 #ifndef TESTS_H_
 #define TESTS_H_
 
+#include "Production.h"
+
 class Tests {
 public:
 	Tests();
 	virtual ~Tests();
 	bool tests();
+    bool testReadFile();
 };
 
 #endif /* TESTS_H_ */

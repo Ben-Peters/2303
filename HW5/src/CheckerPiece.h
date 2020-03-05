@@ -6,7 +6,7 @@
 #define HW5_CHECKERPIECE_H
 
 
-#include "Pawn.h"
+//#include "Pawn.h"
 #include "King.h"
 
 class CheckerPiece {
@@ -23,8 +23,6 @@ public:
         bool king;
     }PossibleMove;
     CheckerPiece(int,int,bool);
-    CheckerPiece(Pawn *pPawn);
-    CheckerPiece(King *pKing);
     virtual ~CheckerPiece();
     int getRow();
     int getCol();
