@@ -3,6 +3,7 @@
 //
 
 #include <cstdlib>
+#include <stdio.h>
 #include "CheckerPiece.h"
 
 CheckerPiece::CheckerPiece(int row, int col, bool red) {
@@ -49,6 +50,7 @@ CheckerPiece::CheckerPiece(Pawn *pPawn) {
 }
 
 CheckerPiece::PossibleMove *CheckerPiece::getAllPossibleMoves(CheckerPiece *) {
+	puts("nullptr");
     return nullptr;
 }
 
@@ -76,6 +78,7 @@ King::King(int row, int col, bool red) : CheckerPiece(row, col, red) {
 King::~King() {}
 
 CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
+	puts("kingStart?");
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
@@ -142,6 +145,7 @@ Pawn::Pawn(int row, int col, bool red) : CheckerPiece(row, col, red) {
 Pawn::~Pawn() {}
 
 CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
+	puts("PawnMethodStart");
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
@@ -194,5 +198,6 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
         }
     }
     free(noMove);
+    puts("endMethod");
     return possibleMoves;
 }

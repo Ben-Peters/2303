@@ -103,12 +103,15 @@ bool Production::prod(int argc, char *argv[]) {
             CheckerPiece::PossibleMove *tempPossibleMoves = (CheckerPiece::PossibleMove*) malloc(sizeof(possibleMoves)*4);
             for (int j = minPiece; j < maxPiece; j++) {
                 if((allPieces+j)->getPawn()){
-                    Pawn* pawn = (Pawn*) (allPieces+j);//seems to be dying here or on the next line for some reason...
-                    tempPossibleMoves = pawn->getAllPossibleMoves(allPieces);
+                    Pawn* pawn = (Pawn*) (allPieces+j);
+		    puts("1");
+		    cout << pawn->getRed() << endl;
+                    tempPossibleMoves = pawn->getAllPossibleMoves(allPieces);//seems to be dying here for some reason, does not even enter method...
                 }else{
                     King* king = (King*) (allPieces+j);
                     tempPossibleMoves = king->getAllPossibleMoves(allPieces);
                 }
+		puts("2");
                 *(possibleMoves + j) = tempPossibleMoves;
             }
             bool madeMove = false;
