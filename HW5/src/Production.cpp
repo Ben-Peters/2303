@@ -39,8 +39,6 @@ bool Production::prod(int argc, char *argv[]) {
         char *eptr = (char *) malloc(sizeof(char *));
         long aL = -1L;
         int numMoves = INT8_MAX;
-        //float maxTreasure = -1;
-        double maxTreas;
         for (int i = 1; i < argc; i++) //don't want to read argv[0]
         {//argv[i] is a string
             //in this program our arguments are NR, NC, gens, filename, print and pause
@@ -82,17 +80,6 @@ bool Production::prod(int argc, char *argv[]) {
 
         if (numMoves == INT8_MAX)
             numMoves = promptNumOfMoves();
-        //if(maxTreasure == -1)
-        // maxTreasure = promptAmountTreasure();
-
-
-        //we'll want to read the file
-        //int nrooms = -1;
-        //AdjMatrix::AdjMat *adjMP = (AdjMatrix::AdjMat *) malloc(sizeof(AdjMatrix::AdjMat));
-        //cannot, do not know nrooms init(adjMP);
-        //cout <<("Back from init Adj Mat"); fflush(stdout);
-        //Room *theRoomPs[10];//addresses for 10 rooms
-
 
         CheckerPiece *allPieces = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
         //initBoard(allPieces);
@@ -101,6 +88,7 @@ bool Production::prod(int argc, char *argv[]) {
         cout << ("Back from read file") << endl;
         cout << "The board:"<< endl;
         simplePrint(allPieces);
+	boardPrint(allPieces);
 
         for (int i = 0; i < numMoves; i++) {
             cout<< "Current Board:" << endl;
@@ -147,6 +135,7 @@ bool Production::readFile(char* filename, CheckerPiece *&pieces, bool &redTurn){
 
         if (fp == NULL)
         {
+	    cout << filename << endl;
             cout <<("Error! opening file")<<endl;
 
         }
@@ -215,4 +204,28 @@ void Production::simplePrint(CheckerPiece* pieces) {
     for (int i = 0; i < 24; i++) {
         cout << (pieces + i)->getRow() << " " << (pieces + i)->getCol() << " " << (pieces + i)->getRed() << endl;
     }
+}
+
+char* Production::boardPrint(CheckerPiece* pieces) {
+	char* board = (char*) malloc(sizeof(char) * 72);
+	for(int i = 0; i < 72; i++){
+		board[i] = ' ';
+		if ((i % 2 == 0 && (i / 9) % 2 == 0) || (i % 2 == 0 && (i / 9) % 2 == 1)){
+			board[i] = '.';
+		}
+		if (i % 9 == 8 && i > 0){
+			board[i] = '\n';
+		}
+		for(int p = 0; p < 24; p++){
+			if ((pieces + p)->getRow() == i / 9 && (pieces + p)->getCol() == i % 9 ) {
+				board[i] = (pieces + p)->getRed()? 'R':'B';
+				cout << "did a thing" << endl;
+			}
+		}
+	}
+	cout << board << endl;
+	return board;
+//	FILE* fp = fopen(filename, "w");
+
+
 }

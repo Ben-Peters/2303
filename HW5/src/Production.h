@@ -20,6 +20,7 @@ public:
 	static bool readFile(char* filename, CheckerPiece *&pieces, bool &redTurn);
     static void makeMove(CheckerPiece::PossibleMove*);
     static void simplePrint(CheckerPiece*);
+    static char* boardPrint(CheckerPiece*);
 };
 
 #endif /* PRODUCTION_H_ */
