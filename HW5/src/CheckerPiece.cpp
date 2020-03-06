@@ -151,6 +151,9 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
     noMove->newPiece = new Pawn(-1, -1, false);
+    for (int x = 0; x < 4; x++) {
+    	*(possibleMoves + x) = *noMove;
+    }
     puts("a");
     for (int i = -1; i <= 1; i += 2) {
         for (int j = 0; j < 24; j++) {
