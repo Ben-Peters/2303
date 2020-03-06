@@ -8,6 +8,7 @@
 #include "Production.h"
 #include <stdbool.h>
 #include<iostream>
+#include <fstream>
 #include<cstring>
 #include <time.h>
 
@@ -88,10 +89,14 @@ bool Production::prod(int argc, char *argv[]) {
         cout << "The board:"<< endl;
 	free(boardPrint(allPieces));
 
+	ofstream fileOut;
+	fileOut.open("output.txt");
+
+
         srand(time(0));
         for (int i = 0; i < numMoves; i++) {
             cout<< "Current Board:" << endl;
-            free(boardPrint(allPieces));
+            doWriteFile(boardPrint(allPieces), &fileOut);
             int maxPiece = 11;
             int minPiece = 0;
             if (redTurn) {
@@ -236,9 +241,14 @@ char* Production::boardPrint(CheckerPiece* pieces) {
 		}
 	}
 	board[72] = '\0';
-	cout << board << endl;
+	//cout << board << endl;
 	return board;
 //	FILE* fp = fopen(filename, "w");
 
 
+}
+
+void Production::doWriteFile(char* str, ofstream* file){
+	*file << str;
+	free(str);
 }
