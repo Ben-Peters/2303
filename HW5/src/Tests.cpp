@@ -127,11 +127,13 @@ bool Tests::testMakeMove() {
             case1 = false;
         }
     }
+    cout << Production::boardPrint(testBoard)<<endl;
     if (!case1) {
         cout << "Fail: Basic Move not made" << endl;
     } else {
         cout<< "Pass: Basic Move made correctly"<<endl;
     }
+
     return true;
 }
 

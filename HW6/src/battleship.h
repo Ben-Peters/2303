@@ -18,7 +18,7 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
-#include <conio.h>
+//#include <conio.h>
 
 /* CONSTANT MACROS */
 
