@@ -199,7 +199,8 @@ int Production::promptNumOfMoves() {
 
 void Production::makeMove(CheckerPiece::PossibleMove *move, int pieceToMove, CheckerPiece *&pieces) {
     if(move->king){
-        Pawn *temp = (Pawn*) (pieces+pieceToMove);
+        Pawn *temp = new Pawn((pieces+pieceToMove)->getRow(), (pieces+pieceToMove)->getCol(), (pieces+pieceToMove)->getRed());
+        delete (pieces+pieceToMove);
         *(pieces+pieceToMove) = new King(temp->getRow(),temp->getCol(), temp->getCol());
         delete temp;
     }
