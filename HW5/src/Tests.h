@@ -16,6 +16,7 @@ public:
 	virtual ~Tests();
 	bool tests();
     static bool testReadFile();
+    static bool testPrintFunc();
 };
 
 #endif /* TESTS_H_ */

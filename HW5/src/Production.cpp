@@ -86,11 +86,12 @@ bool Production::prod(int argc, char *argv[]) {
         answer = readFile(filename, allPieces, redTurn); //read the file
         cout << ("Back from read file") << endl;
         cout << "The board:"<< endl;
-	boardPrint(allPieces);
+	free(boardPrint(allPieces));
 
+        srand(time(0));
         for (int i = 0; i < numMoves; i++) {
             cout<< "Current Board:" << endl;
-            boardPrint(allPieces);
+            free(boardPrint(allPieces));
             int maxPiece = 12;
             int minPiece = 0;
             if (redTurn) {
@@ -102,7 +103,7 @@ bool Production::prod(int argc, char *argv[]) {
             CheckerPiece::PossibleMove *tempPossibleMoves = (CheckerPiece::PossibleMove*) malloc(sizeof(possibleMoves)*4);
             for (int j = minPiece; j < maxPiece; j++) {
                 if((allPieces+j)->getPawn()){
-                    Pawn* pawn = (Pawn*) (allPieces+j);
+                    Pawn* pawn = (Pawn*) (allPieces+j);//seems to be dying here or on the next line for some reason...
                     tempPossibleMoves = pawn->getAllPossibleMoves(allPieces);
                 }else{
                     King* king = (King*) (allPieces+j);
@@ -111,7 +112,6 @@ bool Production::prod(int argc, char *argv[]) {
                 *(possibleMoves + j) = tempPossibleMoves;
             }
             bool madeMove = false;
-            srand(time(0));
             while (!madeMove) {
                 int pieceMoved = (rand() % 12) + minPiece;
                 int moveMade = (rand() % 4);

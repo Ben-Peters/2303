@@ -23,8 +23,8 @@ Tests::~Tests() {
 bool Tests::tests()
 {
 	bool answer = true;
-	bool ok1= false;
-	ok1 = testReadFile();
+	answer = answer && testReadFile();
+	answer = answer && testPrintFunc();
 	return answer;
 }
 
@@ -49,4 +49,33 @@ bool Tests::testReadFile() {
         cout << "Fail: readFile didn't work correctly"<<endl;
     }
     return ok;
+}
+
+bool Tests::testPrintFunc() {
+	bool ok = true;
+	CheckerPiece* checkers = (CheckerPiece*) malloc(sizeof(CheckerPiece) * 24);
+	bool useless;
+	Production::readFile("../test.txt", checkers, useless);
+
+	void* correctV = malloc(sizeof(char) * 72);
+	FILE* fileP = fopen("../testPrint.txt", "r");
+	fread(correctV, sizeof(char), 72, fileP);
+	delete(fileP);
+	char* correct = (char*)correctV;
+	char* toTest = Production::boardPrint(checkers);
+	for(int i = 0; i < 72; i++){
+		if(toTest[i] != correct[i] && ok){
+			ok = false;
+		}
+	}
+	if (!ok) {
+		cout << "Fail: did not properly print board" << endl;
+	}
+	else {
+		cout << "Pass: board printed successfully" << endl;
+	}
+	return ok;
+
+
+
 }
