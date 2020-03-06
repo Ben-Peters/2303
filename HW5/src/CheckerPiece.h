@@ -28,7 +28,6 @@ public:
         CheckerPiece* newPiece;
         bool jump;
         int numJumped;
-        CheckerPiece* jumped;
         bool king;
     }PossibleMove;
     CheckerPiece(int,int,bool);

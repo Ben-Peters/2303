@@ -182,11 +182,13 @@ void Production::initBoard(CheckerPiece *&pieces) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 4; j++) {
             *(pieces + (i * 4) + j) = new Pawn(i, (2 * j) + ((i + 1) % 2), false);
+            cout<< "init pawn: " << (pieces + (i * 4) + j)->getPawn()<< endl;
         }
     }
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 4; j++) {
             *(pieces +12+ (i * 4) + j) = new Pawn(i + 5, (2 * j) + (i % 2), true);
+            cout<< "init pawn2: " << (pieces +12+ (i * 4) + j)->getPawn()<< endl;
         }
     }
 }
@@ -200,7 +202,8 @@ int Production::promptNumOfMoves() {
 
 void Production::makeMove(CheckerPiece::PossibleMove *move, int pieceToMove, CheckerPiece *&pieces) {
     if(move->king){
-        Pawn *temp = (Pawn*) (pieces+pieceToMove);
+        Pawn *temp = new Pawn((pieces+pieceToMove)->getRow(), (pieces+pieceToMove)->getCol(), (pieces+pieceToMove)->getRed());
+        delete (pieces+pieceToMove);
         *(pieces+pieceToMove) = new King(temp->getRow(),temp->getCol(), temp->getCol());
         delete temp;
     }
