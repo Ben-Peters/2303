@@ -92,10 +92,10 @@ bool Production::prod(int argc, char *argv[]) {
         for (int i = 0; i < numMoves; i++) {
             cout<< "Current Board:" << endl;
             free(boardPrint(allPieces));
-            int maxPiece = 12;
+            int maxPiece = 11;
             int minPiece = 0;
             if (redTurn) {
-                maxPiece = 24;
+                maxPiece = 23;
                 minPiece = 12;
             }
             CheckerPiece::PossibleMove **possibleMoves;
@@ -103,13 +103,14 @@ bool Production::prod(int argc, char *argv[]) {
             CheckerPiece::PossibleMove *tempPossibleMoves = (CheckerPiece::PossibleMove*) malloc(sizeof(possibleMoves)*4);
             for (int j = minPiece; j < maxPiece; j++) {
                 if((allPieces+j)->getPawn()){
-                    Pawn* pawn = (Pawn*) (allPieces+j);
+                    //Pawn* pawn = (Pawn*) (allPieces+j);
 		    puts("1");
-		    cout << pawn->getRed() << endl;
-                    tempPossibleMoves = pawn->getAllPossibleMoves(allPieces);//seems to be dying here for some reason, does not even enter method...
+		    Pawn* temp = new Pawn((allPieces+j)->getRow(), (allPieces+j)->getCol(), (allPieces+j)->getRed());
+                    tempPossibleMoves = temp->getAllPossibleMoves(allPieces);//seems to be dying here for some reason, does not even enter method...
                 }else{
                     King* king = (King*) (allPieces+j);
-                    tempPossibleMoves = king->getAllPossibleMoves(allPieces);
+		    King* temp = new King((allPieces+j)->getRow(), (allPieces+j)->getCol(), (allPieces+j)->getRed());
+                    tempPossibleMoves = temp->getAllPossibleMoves(allPieces);
                 }
 		puts("2");
                 *(possibleMoves + j) = tempPossibleMoves;
@@ -218,7 +219,7 @@ void Production::simplePrint(CheckerPiece* pieces) {
 }
 
 char* Production::boardPrint(CheckerPiece* pieces) {
-	char* board = (char*) malloc(sizeof(char) * 72);
+	char* board = (char*) malloc(sizeof(char) * 73);
 	for(int i = 0; i < 72; i++){
 		board[i] = ' ';
 		if ((i % 2 == 0 && (i / 9) % 2 == 0) || (i % 2 == 0 && (i / 9) % 2 == 1)){
@@ -234,6 +235,7 @@ char* Production::boardPrint(CheckerPiece* pieces) {
 			}
 		}
 	}
+	board[72] = '\0';
 	cout << board << endl;
 	return board;
 //	FILE* fp = fopen(filename, "w");
