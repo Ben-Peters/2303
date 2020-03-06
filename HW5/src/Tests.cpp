@@ -25,6 +25,10 @@ bool Tests::tests()
 	bool answer = true;
 	answer = answer && testReadFile();
 	answer = answer && testPrintFunc();
+	answer &= testInitBoard();
+	answer &= testMakeMove();
+	answer &= testPossibleMovesPawn();
+	answer &= testPossibleMovesKing();
 	return answer;
 }
 
@@ -60,7 +64,7 @@ bool Tests::testPrintFunc() {
 	void* correctV = malloc(sizeof(char) * 72);
 	FILE* fileP = fopen("../testPrint.txt", "r");
 	fread(correctV, sizeof(char), 72, fileP);
-	delete(fileP);
+	//delete(fileP);
 	char* correct = (char*)correctV;
 	char* toTest = Production::boardPrint(checkers);
 	for(int i = 0; i < 72; i++){
@@ -78,4 +82,24 @@ bool Tests::testPrintFunc() {
 
 
 
+}
+
+bool Tests::testInitBoard(){
+    puts("Fail: Test of init board not implemented");
+    return true;
+}
+
+bool Tests::testMakeMove(){
+    puts("Fail: Test of make move not implemented");
+    return true;
+}
+
+bool Tests::testPossibleMovesPawn(){
+    puts("Fail: Test of possible moves for pawn not implemented");
+    return true;
+}
+
+bool Tests::testPossibleMovesKing() {
+    puts("Fail: Test of possible moves for pawn not implemented");
+    return true;
 }

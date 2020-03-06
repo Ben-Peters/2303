@@ -17,6 +17,10 @@ public:
 	bool tests();
     static bool testReadFile();
     static bool testPrintFunc();
+    static bool testInitBoard();
+    static bool testMakeMove();
+    static bool testPossibleMovesPawn();
+    static bool testPossibleMovesKing();
 };
 
 #endif /* TESTS_H_ */
