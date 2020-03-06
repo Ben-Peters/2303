@@ -91,6 +91,7 @@ bool Production::prod(int argc, char *argv[]) {
 
 	ofstream fileOut;
 	fileOut.open("output.txt");
+	fileOut << "OUTPUT FILE";
 
 
         srand(time(0));
@@ -235,7 +236,9 @@ char* Production::boardPrint(CheckerPiece* pieces) {
 		}
 		for(int p = 0; p < 24; p++){
 			if ((pieces + p)->getRow() == i / 9 && (pieces + p)->getCol() == i % 9 ) {
-				board[i] = (pieces + p)->getRed()? 'R':'B';
+				board[i] = (pieces + p)->getRed()?
+					(pieces + p)->getPawn()? 'r':'R':
+					(pieces + p)->getPawn()? 'b':'B';
 				//cout << "did a thing" << endl;
 			}
 		}
