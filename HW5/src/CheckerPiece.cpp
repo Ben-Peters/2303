@@ -157,12 +157,14 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
             std::cout << j << std::endl;
             if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                 this->red == (pieces + j)->getRed()) {
+		puts("b1");
                 //same place same team
                 *(possibleMoves + k++) = *noMove;
                 puts("b");
             } else if (this->row + 1 != (pieces + j)->getRow() && this->col + i != (pieces + j)->getCol() &&
                        (this->row + 1 < 8 && this->col + i < 8 && this->col + i > -1)) {
                 //valid move with no jump or anything like that
+		puts("c1");
                 CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
                 move->newPiece = new Pawn(this->row + 1, this->col + i, this->red);
                 move->jump = false;
@@ -173,6 +175,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                 puts("c");
             } else if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                        this->red != (pieces + j)->getRed()) {
+		puts("d1");
                 //same space different team with +/-1(Possible jump)
                 if ((this->row == 6 && !(this->red)) || (this->row == 1 && (this->red))) {
                     //jump would be off the board
@@ -200,6 +203,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                 puts("d");
             } else {
                 *(possibleMoves + k++) = *noMove;
+		puts("e");
             }
         }
     }
