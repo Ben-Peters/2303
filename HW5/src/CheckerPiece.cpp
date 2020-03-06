@@ -174,7 +174,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                 move->numJumped = -1;
                 move->king = false;
                 *(possibleMoves + k++) = *move;
-                free(move);
+                //free(move);
                 puts("c");
             } else if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                        this->red != (pieces + j)->getRed()) {
@@ -192,7 +192,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                     move->numJumped = j;
                     move->king = true;
                     *(possibleMoves + k++) = *move;
-                    free(move);
+                    //free(move);
                 } else {
                     //valid jump but not a king
                     CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
@@ -201,7 +201,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                     move->numJumped = j;
                     move->king = false;
                     *(possibleMoves + k++) = *move;
-                    free(move);
+                    //free(move);
                 }
                 puts("d");
             } else {
