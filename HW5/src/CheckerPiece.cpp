@@ -3,6 +3,7 @@
 //
 
 #include <cstdlib>
+#include <iostream>
 #include <stdio.h>
 #include "CheckerPiece.h"
 
@@ -150,12 +151,15 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
     *noMove->newPiece = new Pawn(-1,-1,false);
+    puts("a");
     for (int i = -1; i <= 1; i += 2) {
         for (int j = 0; j < 24; j++) {
+	    std::cout << j << std::endl;
             if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                 this->red == (pieces + j)->getRed()) {
                 //same place same team
                 *(possibleMoves + k++) = *noMove;
+		puts("b");
             } else if (this->row + 1 != (pieces + j)->getRow() && this->col + i != (pieces + j)->getCol() &&
                        (this->row + 1 < 8 && this->col + i < 8 && this->col + i > -1)) {
                 //valid move with no jump or anything like that
@@ -166,6 +170,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                 move->king = false;
                 *(possibleMoves + k++) = *move;
                 free(move);
+		puts("c");
             } else if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                        this->red != (pieces + j)->getRed()) {
                 //same space different team with +/-1(Possible jump)
@@ -192,6 +197,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                     *(possibleMoves + k++) = *move;
                     free(move);
                 }
+		puts("d");
             } else {
                 *(possibleMoves + k++) = *noMove;
             }
