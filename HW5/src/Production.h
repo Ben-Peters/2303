@@ -18,7 +18,7 @@ public:
     int promptNumOfMoves();
     static void initBoard(CheckerPiece*&);
 	static bool readFile(char* filename, CheckerPiece *&pieces, bool &redTurn);
-    static void makeMove(CheckerPiece::PossibleMove*);
+    static void makeMove(CheckerPiece::PossibleMove*, int, CheckerPiece *&);
     static void simplePrint(CheckerPiece*);
     static char* boardPrint(CheckerPiece*);
 };

@@ -61,7 +61,6 @@ bool Production::prod(int argc, char *argv[]) {
                     break;
                 case 2:
                     //this is maximum number of moves
-
                     aL = strtol(argv[i], &eptr, 10);
                     numMoves = (int) aL;
                     printf("Number of moves is %d\n", numMoves);
@@ -87,12 +86,11 @@ bool Production::prod(int argc, char *argv[]) {
         answer = readFile(filename, allPieces, redTurn); //read the file
         cout << ("Back from read file") << endl;
         cout << "The board:"<< endl;
-        simplePrint(allPieces);
 	boardPrint(allPieces);
 
         for (int i = 0; i < numMoves; i++) {
             cout<< "Current Board:" << endl;
-            simplePrint(allPieces);
+            boardPrint(allPieces);
             int maxPiece = 12;
             int minPiece = 0;
             if (redTurn) {
@@ -117,8 +115,8 @@ bool Production::prod(int argc, char *argv[]) {
             while (!madeMove) {
                 int pieceMoved = (rand() % 12) + minPiece;
                 int moveMade = (rand() % 4);
-                if ((*((*(possibleMoves + (pieceMoved))) + moveMade)).newPiece != nullptr) {
-                    makeMove(*(possibleMoves + (pieceMoved)));
+                if ((*((*(possibleMoves + (pieceMoved))) + moveMade)).newPiece->getRow() != -1) {
+                    makeMove(*(possibleMoves + (pieceMoved)),pieceMoved, allPieces);
                     madeMove = true;
                 }
             }
@@ -196,8 +194,17 @@ int Production::promptNumOfMoves() {
     return moves;
 }
 
-void Production::makeMove(CheckerPiece::PossibleMove *move) {
-
+void Production::makeMove(CheckerPiece::PossibleMove *move, int pieceToMove, CheckerPiece *&pieces) {
+    if(move->king){
+        Pawn *temp = (Pawn*) (pieces+pieceToMove);
+        *(pieces+pieceToMove) = new King(temp->getRow(),temp->getCol(), temp->getCol());
+        delete temp;
+    }
+    if(move->jump){
+        delete (pieces+move->numJumped);
+    }
+    (pieces+pieceToMove)->setRow(move->newPiece->getRow());
+    (pieces+pieceToMove)->setCol(move->newPiece->getCol());
 }
 
 void Production::simplePrint(CheckerPiece* pieces) {
@@ -219,7 +226,7 @@ char* Production::boardPrint(CheckerPiece* pieces) {
 		for(int p = 0; p < 24; p++){
 			if ((pieces + p)->getRow() == i / 9 && (pieces + p)->getCol() == i % 9 ) {
 				board[i] = (pieces + p)->getRed()? 'R':'B';
-				cout << "did a thing" << endl;
+				//cout << "did a thing" << endl;
 			}
 		}
 	}

@@ -52,6 +52,20 @@ CheckerPiece::PossibleMove *CheckerPiece::getAllPossibleMoves(CheckerPiece *) {
     return nullptr;
 }
 
+CheckerPiece::CheckerPiece(King *pKing) {
+    row = pKing->getRow();
+    col = pKing->getCol();
+    red = pKing->getRed();
+    pawn = false;
+}
+
+ CheckerPiece::CheckerPiece(CheckerPiece *pPiece) {
+    row = pPiece->getRow();
+    col = pPiece->getCol();
+    red = pPiece->getRed();
+    pawn = pPiece->getPawn();
+}
+
 King::King(int row, int col, bool red) : CheckerPiece(row, col, red) {
     this->row = row;
     this->col = col;
@@ -65,7 +79,7 @@ CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-    *noMove->newPiece = nullptr;
+    *noMove->newPiece = new King(-1,-1,false);
     for(int l = 1; l >=-1; l += -2) {
         for (int i = -1; i <= 1; i += 2) {
             for (int j = 0; j < 24; j++) {
@@ -131,7 +145,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-    *noMove->newPiece = nullptr;
+    *noMove->newPiece = new Pawn(-1,-1,false);
     for (int i = -1; i <= 1; i += 2) {
         for (int j = 0; j < 24; j++) {
             if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&

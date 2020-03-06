@@ -19,6 +19,9 @@ private:
     int col;
     bool red;
     bool pawn;
+protected:
+    explicit CheckerPiece(CheckerPiece *pPiece);
+
 public:
 
     typedef struct{
@@ -39,6 +42,8 @@ public:
     void setRed(bool);
     virtual CheckerPiece::PossibleMove *getAllPossibleMoves(CheckerPiece *);
     CheckerPiece(Pawn *pPawn);
+
+    CheckerPiece(King *pKing);
 };
 
 class Pawn : public CheckerPiece{
