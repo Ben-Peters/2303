@@ -150,7 +150,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-    *noMove->newPiece = new Pawn(-1,-1,false);
+    noMove->newPiece = new Pawn(-1, -1, false);
     for (int x = 0; x < 4; x++) {
     	*(possibleMoves + x) = *noMove;
     }
