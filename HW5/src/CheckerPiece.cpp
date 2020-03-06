@@ -51,7 +51,7 @@ CheckerPiece::CheckerPiece(Pawn *pPawn) {
 }
 
 CheckerPiece::PossibleMove *CheckerPiece::getAllPossibleMoves(CheckerPiece *) {
-	puts("nullptr");
+    puts("nullptr");
     return nullptr;
 }
 
@@ -62,7 +62,7 @@ CheckerPiece::CheckerPiece(King *pKing) {
     pawn = false;
 }
 
- CheckerPiece::CheckerPiece(CheckerPiece *pPiece) {
+CheckerPiece::CheckerPiece(CheckerPiece *pPiece) {
     row = pPiece->getRow();
     col = pPiece->getCol();
     red = pPiece->getRed();
@@ -79,12 +79,12 @@ King::King(int row, int col, bool red) : CheckerPiece(row, col, red) {
 King::~King() {}
 
 CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
-	puts("kingStart?");
+    puts("kingStart?");
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-    *noMove->newPiece = new King(-1,-1,false);
-    for(int l = 1; l >=-1; l += -2) {
+    *noMove->newPiece = new King(-1, -1, false);
+    for (int l = 1; l >= -1; l += -2) {
         for (int i = -1; i <= 1; i += 2) {
             for (int j = 0; j < 24; j++) {
                 if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
@@ -111,7 +111,7 @@ CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
                                (this->col + (i * 2) <= 7 && this->col + (i * 2) >= 0)) {
                         //valid jump into king but that doesnt matter because its a king already
                         CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-                        move->newPiece = new King(this->row + (l*2), this->col + (2 * i), this->red);
+                        move->newPiece = new King(this->row + (l * 2), this->col + (2 * i), this->red);
                         move->jump = true;
                         move->numJumped = j;
                         move->king = false;
@@ -120,7 +120,7 @@ CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
                     } else {
                         //valid jump but not a king
                         CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-                        move->newPiece = new King(this->row + (l*2), this->col + (2 * i), this->red);
+                        move->newPiece = new King(this->row + (l * 2), this->col + (2 * i), this->red);
                         move->jump = true;
                         move->numJumped = j;
                         move->king = false;
@@ -146,7 +146,7 @@ Pawn::Pawn(int row, int col, bool red) : CheckerPiece(row, col, red) {
 Pawn::~Pawn() {}
 
 CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
-	puts("PawnMethodStart");
+    puts("PawnMethodStart");
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
@@ -157,13 +157,13 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     puts("a");
     for (int i = -1; i <= 1; i += 2) {
         for (int j = 0; j < 24; j++) {
-	    std::cout << j << std::endl;
+            std::cout << j << std::endl;
             if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                 this->red == (pieces + j)->getRed()) {
 		puts("b1");
                 //same place same team
                 *(possibleMoves + k++) = *noMove;
-		puts("b");
+                puts("b");
             } else if (this->row + 1 != (pieces + j)->getRow() && this->col + i != (pieces + j)->getCol() &&
                        (this->row + 1 < 8 && this->col + i < 8 && this->col + i > -1)) {
                 //valid move with no jump or anything like that
@@ -175,7 +175,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                 move->king = false;
                 *(possibleMoves + k++) = *move;
                 free(move);
-		puts("c");
+                puts("c");
             } else if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                        this->red != (pieces + j)->getRed()) {
 		puts("d1");
@@ -187,7 +187,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                            (this->col + (i * 2) <= 7 && this->col + (i * 2) >= 0)) {
                     //valid jump into king
                     CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-                    move->newPiece = new King(this->row + (1*2), this->col + (2 * i), this->red);
+                    move->newPiece = new King(this->row + (1 * 2), this->col + (2 * i), this->red);
                     move->jump = true;
                     move->numJumped = j;
                     move->king = true;
@@ -196,14 +196,14 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                 } else {
                     //valid jump but not a king
                     CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
-                    move->newPiece = new Pawn(this->row + (1*2), this->col + (2 * i), this->red);
+                    move->newPiece = new Pawn(this->row + (1 * 2), this->col + (2 * i), this->red);
                     move->jump = true;
                     move->numJumped = j;
                     move->king = false;
                     *(possibleMoves + k++) = *move;
                     free(move);
                 }
-		puts("d");
+                puts("d");
             } else {
                 *(possibleMoves + k++) = *noMove;
 		puts("e");
