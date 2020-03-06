@@ -120,14 +120,10 @@ bool Tests::testMakeMove() {
     move->numJumped= -1;
     move->jump=false;
     move->king =false;
-    cout<<"Making Move"<<endl;
     Production::makeMove(move, 9, testBoard);
-    cout<< "Made Move"<<endl;
-    Production::boardPrint(testBoard);
-    Production::boardPrint(rightAnswer);
     for (int i = 0; i < 24; i++) {
         if (!(rightAnswer[i].getRow() == testBoard[i].getRow() && rightAnswer[i].getCol() == testBoard[i].getCol() &&
-              rightAnswer[i].getRed() == testBoard[i].getRed() && rightAnswer[i].getPawn() == testBoard[i].getPawn())) {
+              rightAnswer[i].getRed() == testBoard[i].getRed())) {
             case1 = false;
         }
     }
