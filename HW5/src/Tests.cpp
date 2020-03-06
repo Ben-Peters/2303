@@ -84,13 +84,7 @@ bool Tests::testPrintFunc() {
 
 }
 
-bool Tests::testInitBoard(){
-    puts("Fail: Test of init board not implemented");
-    return true;
-}
-
-bool Tests::testMakeMove(){
-    bool ok = true;
+bool Tests::testInitBoard(){bool ok = true;
     CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     bool redTurn;
     Production::readFile("../test.txt", rightAnswer, redTurn);
@@ -103,11 +97,17 @@ bool Tests::testMakeMove(){
     }
     ok = redTurn && ok;
     if(ok){
-        cout<<"Pass: testMakeMove works correctly"<<endl;
+        cout<<"Pass: testInitBoard works correctly"<<endl;
     }else{
-        cout << "Fail: testMakeMove didn't work correctly"<<endl;
+        cout << "Fail: testInitBoard didn't work correctly"<<endl;
     }
     return ok;
+
+}
+
+bool Tests::testMakeMove(){
+    puts("Fail: Test of makeMove not implemented");
+    return true;
 }
 bool Tests::testPossibleMovesPawn(){
     puts("Fail: Test of possible moves for pawn not implemented");
