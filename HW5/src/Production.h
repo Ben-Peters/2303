@@ -10,6 +10,7 @@
 #define BOARD_SIZE 8
 
 #include "CheckerPiece.h"
+#include <fstream>
 class Production {
 public:
 	Production();
@@ -21,6 +22,7 @@ public:
     static void makeMove(CheckerPiece::PossibleMove*, int, CheckerPiece *&);
     static void simplePrint(CheckerPiece*);
     static char* boardPrint(CheckerPiece*);
+    static void doWriteFile(char*, std::ofstream*);
 };
 
 #endif /* PRODUCTION_H_ */
