@@ -5,6 +5,8 @@
 #ifndef INC_2303_BOARD_H
 #define INC_2303_BOARD_H
 
+#include <iostream>
+
 class Ship {
 public:
     Ship();
@@ -27,6 +29,7 @@ public:
     bool isValidLocation(int row, int col, int length, char direction);
     bool checkBounds(int row, int col);
     void printBoard(bool withShips);
+    void writeBoardTo(std::ostream& file);
     void updateBoard(int row, int col);
     void addShip(Ship* ship, int row, int col, char direction);
     bool didSink();

@@ -276,6 +276,8 @@ bool Tests::testIsValidLocation() {
 }
 
 bool Tests::testWinner() {
+    std::ofstream fp;
+    fp.open("../output.txt", std::ofstream::out);
     bool ok = false;
     Board* user = new Board(5, "TEST");
     Board* cpu = new Board(5, "TEST");
@@ -291,7 +293,7 @@ bool Tests::testWinner() {
     cpu->manuallyAddShip(sub, 2, 4, 2, 'e');
     cpu->manuallyAddShip(sub, 3, 0, 2, 'e');
     cpu->manuallyAddShip(sub, 4, 1, 2, 'e');
-    int result1 = Production::checkForWinner(user, cpu);
+    int result1 = Production::checkForWinner(user, cpu, fp);
     user->updateBoard(2, 2);
     user->updateBoard(2, 3);
     user->updateBoard(2, 4);
@@ -305,7 +307,7 @@ bool Tests::testWinner() {
     user->updateBoard(0, 3);
     user->updateBoard(0, 4);
     user->didSink();
-    int result2 = Production::checkForWinner(user, cpu);
+    int result2 = Production::checkForWinner(user, cpu, fp);
     user->manuallyAddShip(carrier, 1, 4, 6, 'w');
     cpu->updateBoard(2, 2);
     cpu->updateBoard(2, 3);
@@ -320,7 +322,7 @@ bool Tests::testWinner() {
     cpu->updateBoard(0, 3);
     cpu->updateBoard(0, 4);
     cpu->didSink();
-    int result3 = Production::checkForWinner(user, cpu);
+    int result3 = Production::checkForWinner(user, cpu, fp);
     if (result1 == 0 && result2 == 2 && result3 == 1){
         ok = true;
         puts("Pass: Successfully determined correct winner");

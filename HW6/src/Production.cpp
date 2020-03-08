@@ -5,6 +5,7 @@
 #include "Production.h"
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -29,7 +30,7 @@ bool Production::run(int argc, char *argv[]) {
     {
         printf("Found %d interesting arguments.\n", argc - 1);
         fflush(stdout);
-        char filename[51];
+        char filename[55];
         char *eptr = (char *) malloc(sizeof(char *));
         long aL = -1L;
         int boardSize = INT8_MAX;
@@ -43,7 +44,7 @@ bool Production::run(int argc, char *argv[]) {
                     //this is filename
                     printf("The length of the filename is %lu.\n", strlen(argv[i]));
                     printf("The proposed filename is %s.\n", argv[i]);
-                    if (strlen(argv[i]) >= 51) {
+                    if (strlen(argv[i]) >= 55) {
                         cout << ("Filename is too long.") << endl;
                         fflush(stdout);
                         answer = false;
@@ -71,6 +72,11 @@ bool Production::run(int argc, char *argv[]) {
         cout << ("after reading arguments") << endl;
         fflush(stdout);
 
+        //FILE* fp = fopen(filename, "w");
+        std::ofstream fp;
+        fp.open(filename, std::ofstream::out | std::ofstream::trunc);
+        fp.close();
+
         if (boardSize == INT8_MAX)
             boardSize = promptForBoardSize();
 
@@ -80,8 +86,22 @@ bool Production::run(int argc, char *argv[]) {
         userBoard->placeShipsRandom();
         cpuBoard->placeShipsRandom();
 
+        fp.open(filename, std::ofstream::out);
+        if (!fp.is_open()){
+            fflush(stdout);
+            std::cout << "Could not open file" << endl;
+            return false;
+        }
+        writeToFile("Initial Setup\n", fp);
+
+        userBoard->writeBoardTo(fp);
+        cpuBoard->writeBoardTo(fp);
+
+        writeToFile("--------------------\n", fp);
+
         bool playing = true;
         bool userTurn = true;
+        int round = 1;
         while (playing){
             if (userTurn){
                 cout << "Your board:" << endl;
@@ -104,14 +124,19 @@ bool Production::run(int argc, char *argv[]) {
                 int cpuCol = rand() % (boardSize-1);
                 userBoard->updateBoard(cpuRow, cpuCol);
                 userBoard->didSink();
+                round++;
+                userBoard->writeBoardTo(fp);
+                cpuBoard->writeBoardTo(fp);
+                writeToFile("--------------------\n", fp);
             }
 
             userTurn = !userTurn;
-            int result = checkForWinner(userBoard, cpuBoard);
+            int result = checkForWinner(userBoard, cpuBoard, fp);
             if (result > 0){
                 playing = false;
             }
         }
+        fp.close();
     }
     return answer;
 }
@@ -130,14 +155,20 @@ int* Production::promptForMove() {
     return coordinates;
 }
 
-int Production::checkForWinner(Board* user, Board* cpu) {
+int Production::checkForWinner(Board* user, Board* cpu, std::ofstream& file) {
     if (user->qtyShipsLeft() == 0) {
         puts("You lost :(");
+        writeToFile("You lost :(", file);
         return 2;
     }else if (cpu->qtyShipsLeft() == 0){
         puts("You won!!");
+        writeToFile("You won!!", file);
         return 1;
     }else{
         return 0;
     }
+}
+
+void Production::writeToFile(char *str, std::ofstream& file) {
+    file << str;
 }

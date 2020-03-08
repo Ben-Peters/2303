@@ -6,6 +6,7 @@
 #define INC_2303_PRODUCTION_H
 
 #include "Board.h"
+#include <fstream>
 
 class Production {
 public:
@@ -14,7 +15,8 @@ public:
     static bool run(int argc, char* argv[]);
     static int promptForBoardSize();
     static int* promptForMove();
-    static int checkForWinner(Board* user, Board* cpu);
+    static int checkForWinner(Board* user, Board* cpu, std::ofstream& file);
+    static void writeToFile(char* str, std::ofstream& file);
 };
 
 

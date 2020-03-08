@@ -261,3 +261,24 @@ bool Board::didSink() {
     }
     return false;
 }
+
+void Board::writeBoardTo(std::ostream& file) {
+    file << playerName << " Board" << std::endl;
+    file << "  ";
+    for (int a = 0; a < size; a++){
+        file << a;
+        file << " ";
+    }
+    file << std::endl;
+
+    for (int i = 0; i < size; i++) {
+        file << i << " ";
+
+        for (int j = 0; j < size; j++) {
+            char id = cells[i][j];
+            file << id << " ";
+        }
+        file << std::endl;
+    }
+    file << std::endl;
+}
