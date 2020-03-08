@@ -5,12 +5,12 @@
  | Programming Assignment 4: Basic Game of Battleship                    
  | Date: October 17, 2012                                                 
  +------------------------------------------------------------------------------                                                                       
- | Description: Thie file contains all the function definition of the prototypes
+ | Description: This file contains all the function definition of the prototypes
  |              listed in battleship.h These are the functions necessary to run
  |              the game of Battleship.
  ==============================================================================*/
 
-#include "battleship.h"
+#include "battleship-orig.h"
 
 /**
  * Function name : welcomeScreen ()
@@ -291,7 +291,7 @@ void systemMessage (char *message) {
 
 	do {
 		printf ("%s", message);
-	} while ((ch = getch()) != '\r');
+	} while (ch != '\0');
 }
 
 /**

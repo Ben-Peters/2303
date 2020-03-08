@@ -17,7 +17,7 @@
  |              has 2 cells.                               
  ==============================================================================*/
 
-#include "battleship.h"
+#include "battleship-orig.h"
 
 int main (void)
 {

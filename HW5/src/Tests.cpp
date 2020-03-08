@@ -40,7 +40,7 @@ bool Tests::testReadFile() {
     //Production::simplePrint(rightAnswer);
     CheckerPiece *trial = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     bool redTurn;
-    Production::readFile("../test.txt", trial, redTurn);
+    Production::readFile("/Users/Tom/Projects/CS/CS2303/2303/HW5/test.txt", trial, redTurn);
     //Production::simplePrint(trial);
     for (int i = 0; i < 24; i++) {
         if (!(rightAnswer[i].getRow() == trial[i].getRow() && rightAnswer[i].getCol() == trial[i].getCol() &&
@@ -61,10 +61,10 @@ bool Tests::testPrintFunc() {
     bool ok = true;
     CheckerPiece *checkers = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     bool useless;
-    Production::readFile("../test.txt", checkers, useless);
+    Production::readFile("/Users/Tom/Projects/CS/CS2303/2303/HW5/test.txt", checkers, useless);
 
     void *correctV = malloc(sizeof(char) * 72);
-    FILE *fileP = fopen("../testPrint.txt", "r");
+    FILE *fileP = fopen("/Users/Tom/Projects/CS/CS2303/2303/HW5/testPrint.txt", "r");
     fread(correctV, sizeof(char), 72, fileP);
     //delete(fileP);
     char *correct = (char *) correctV;
@@ -88,7 +88,7 @@ bool Tests::testInitBoard() {
     bool ok = true;
     CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     bool redTurn;
-    Production::readFile("../test.txt", rightAnswer, redTurn);
+    Production::readFile("/Users/Tom/Projects/CS/CS2303/2303/HW5/test.txt", rightAnswer, redTurn);
     CheckerPiece *trial = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
     Production::initBoard(trial);
     for (int i = 0; i < 24; i++) {
@@ -138,11 +138,11 @@ bool Tests::testMakeMove() {
 }
 
 bool Tests::testPossibleMovesPawn() {
-    puts("Fail: Test of possible moves for pawn not implemented");
+    puts("Fail: Test of possible moves failed");
     return true;
 }
 
 bool Tests::testPossibleMovesKing() {
-    puts("Fail: Test of possible moves for pawn not implemented");
+    puts("Fail: Test of possible moves failed");
     return true;
 }

@@ -36,7 +36,7 @@ bool Production::prod(int argc, char *argv[]) {
     {
         printf("Found %d interesting arguments.\n", argc - 1);
         fflush(stdout);
-        char filename[50];
+        char filename[51];
         char *eptr = (char *) malloc(sizeof(char *));
         long aL = -1L;
         int numMoves = INT8_MAX;
@@ -50,7 +50,7 @@ bool Production::prod(int argc, char *argv[]) {
                     //this is filename
                     printf("The length of the filename is %lu.\n", strlen(argv[i]));
                     printf("The proposed filename is %s.\n", argv[i]);
-                    if (strlen(argv[i]) >= 50) {
+                    if (strlen(argv[i]) >= 51) {
                         cout << ("Filename is too long.") << endl;
                         fflush(stdout);
                         answer = false;
