@@ -4,9 +4,10 @@
 
 #include "Sub.h"
 
-Sub::Sub():Ship(size, id) {
+Sub::Sub():Ship(size, id, sunk) {
     this->size = 3;
     this->id = 's';
+    this->sunk = false;
 }
 
 Sub::~Sub() {

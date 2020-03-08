@@ -4,9 +4,10 @@
 
 #include "Destroyer.h"
 
-Destroyer::Destroyer():Ship(size, id) {
-    this->size = 3;
+Destroyer::Destroyer():Ship(size, id, sunk) {
+    this->size = 2;
     this->id = 'd';
+    this->sunk = false;
 }
 
 Destroyer::~Destroyer() {

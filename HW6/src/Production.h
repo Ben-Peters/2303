@@ -5,12 +5,16 @@
 #ifndef INC_2303_PRODUCTION_H
 #define INC_2303_PRODUCTION_H
 
+#include "Board.h"
 
 class Production {
 public:
     Production();
     virtual ~Production();
-    static void initBoard(int numRows);
+    static bool run(int argc, char* argv[]);
+    static int promptForBoardSize();
+    static int* promptForMove();
+    static int checkForWinner(Board* user, Board* cpu);
 };
 
 

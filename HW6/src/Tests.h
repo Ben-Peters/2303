@@ -17,11 +17,7 @@ public:
     static bool testBoundsCheck();
     static bool testDidSinkShip();
     static bool testIsValidLocation();
-    static bool testStringToLocation();
     static bool testWinner();
-    static bool testGetPosition();
-    static bool testGetTarget();
-    static bool testCheckShot();
 };
 
 #endif //INC_2303_TESTS_H

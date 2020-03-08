@@ -4,9 +4,10 @@
 
 #include "Battleship.h"
 
-Battleship::Battleship():Ship(size, id) {
+Battleship::Battleship():Ship(size, id, sunk) {
     this->size = 4;
     this->id = 'b';
+    this->sunk = false;
 }
 
 Battleship::~Battleship() {
