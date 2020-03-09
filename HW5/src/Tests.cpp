@@ -134,6 +134,8 @@ bool Tests::testMakeMove() {
         } else {
             cout << "Pass: Basic move made correctly" << endl;
         }
+        free (testBoard);
+        free(rightAnswer);
     }
     {
         CheckerPiece *testBoard = new Pawn(1, 0, true);
@@ -151,18 +153,22 @@ bool Tests::testMakeMove() {
                   rightAnswer[0].getPawn() == testBoard[0].getPawn()));
         if (!case2) {
             cout << "Fail: King move not made" << endl;
-            //cout<<Production::boardPrint(rightAnswer)<<endl;
-            //cout<<Production::boardPrint(testBoard)<<endl;
+            cout<<Production::boardPrint(rightAnswer)<<endl;
+            cout<<Production::boardPrint(testBoard)<<endl;
         } else {
             cout << "Pass: King move made correctly" << endl;
+            //cout<<Production::boardPrint(rightAnswer)<<endl;
+            //cout<<Production::boardPrint(testBoard)<<endl;
         }
+        free (testBoard);
+        free(rightAnswer);
     }
     {
         CheckerPiece *testBoard = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 2);
-        testBoard = new Pawn(1, 0, false);
-        *(testBoard+1) = new Pawn(2, 1, true);
+        testBoard[0] = new Pawn(1, 2, false);
+        testBoard[1] = new Pawn(2, 3, true);
         CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 2);
-        *(rightAnswer+1) = new King(0, 1, true);
+        rightAnswer[1] = new King(0, 1, true);
         CheckerPiece::PossibleMove *move = (CheckerPiece::PossibleMove *) malloc((sizeof(CheckerPiece::PossibleMove)));
         CheckerPiece *newPiece = new King(0, 1, true);
         move->newPiece = newPiece;
@@ -178,16 +184,25 @@ bool Tests::testMakeMove() {
                   rightAnswer[1].getPawn() == testBoard[1].getPawn()));
         if (!case3) {
             cout << "Fail: Jump into King move not made" << endl;
-            cout<<Production::boardPrint(rightAnswer)<<endl;
-            cout<<Production::boardPrint(testBoard)<<endl;
+            //cout<<(rightAnswer[1].getRow() == testBoard[1].getRow())<<endl;
+            //cout<<(rightAnswer[1].getCol() == testBoard[1].getCol())<<endl;
+            //cout<<(rightAnswer[1].getRed() == testBoard[1].getRed())<<endl;
+            //cout<<(rightAnswer[1].getPawn() == testBoard[1].getPawn())<<endl;
+            cout<<rightAnswer[1].getRed()<<endl;
+            cout<<testBoard[1].getRed()<<endl;
+            //cout<<Production::boardPrint(rightAnswer)<<endl;
+            //cout<<Production::boardPrint(testBoard)<<endl;
         } else {
             cout << "Pass: Jump into King move made correctly" << endl;
         }
     }
-    //cout << Production::boardPrint(testBoard)<<endl;
 
-
-    return case1 && case2;
+    if(case1 && case2 && case3){
+        cout<<"Pass: Make move works correctly"<<endl;
+    }else{
+        cout<<"Fail: Make move didn't work correctly" <<endl;
+    }
+    return case1 && case2 && case3;
 }
 
 bool Tests::testPossibleMovesPawn() {

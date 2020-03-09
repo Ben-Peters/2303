@@ -205,25 +205,16 @@ int Production::promptNumOfMoves() {
 }
 
 void Production::makeMove(CheckerPiece::PossibleMove *move, int pieceToMove, CheckerPiece *&pieces) {
-    cout<<"in makeMove"<<endl;
     if(move->king){
-        cout<<"Making King"<<endl;
-        Pawn *temp = new Pawn((pieces+pieceToMove)->getRow(), (pieces+pieceToMove)->getCol(), (pieces+pieceToMove)->getRed());
-        //Pawn *temp = (Pawn*) (pieces+pieceToMove);
-        cout<<"Cased"<<endl;
-        free (pieces+pieceToMove);
-        cout<<"deleted"<<endl;
-        *(pieces+pieceToMove) = new King(temp->getRow(),temp->getCol(), temp->getCol());
-        delete temp;
-        cout<<"made a King"<<endl;
+        Pawn *temp = (Pawn*) (pieces+pieceToMove);
+        *(pieces+pieceToMove) = new King(temp->getRow(),temp->getCol(), temp->getRed());
     }
     if(move->jump){
-        cout<< "about to delete"<<endl;
         free (pieces+(move->numJumped));
-        //cout<<"deleted"<<endl;
     }
     (pieces+pieceToMove)->setRow(move->newPiece->getRow());
     (pieces+pieceToMove)->setCol(move->newPiece->getCol());
+    (pieces+pieceToMove)->setRed(move->newPiece->getRed());
 }
 
 void Production::simplePrint(CheckerPiece* pieces) {
@@ -261,5 +252,6 @@ char* Production::boardPrint(CheckerPiece* pieces) {
 
 void Production::doWriteFile(char* str, ofstream* file){
 	*file << str;
+	*file << endl;
 	free(str);
 }
