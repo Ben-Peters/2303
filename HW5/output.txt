@@ -1,0 +1,17 @@
+OUTPUT FILE:
+.B.B.B.B
+B.B.B.B.
+.B.B.B.B
+ . . . .
+. . . . 
+R.R.R.R.
+.R.R.R.R
+R.R.R.R.
+RB.B.B.B
+B.B.B.B.
+.B.B.B.B
+ . . . .
+. . . . 
+R.R.R. .
+.R.R.R.R
+R.R.R.R.

@@ -108,33 +108,86 @@ bool Tests::testInitBoard() {
 }
 
 bool Tests::testMakeMove() {
-    bool case1, case2, case3;
-    CheckerPiece *testBoard = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
-    Production::initBoard(testBoard);
-    CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
-    Production::initBoard(rightAnswer);
-    CheckerPiece *newPiece = new Pawn(3, 2, false);
-    *(rightAnswer + 9) = *newPiece;
-    CheckerPiece::PossibleMove *move = (CheckerPiece::PossibleMove *) malloc((sizeof(CheckerPiece::PossibleMove)));
-    move->newPiece = newPiece;
-    move->numJumped= -1;
-    move->jump=false;
-    move->king =false;
-    Production::makeMove(move, 9, testBoard);
-    for (int i = 0; i < 24; i++) {
-        if (!(rightAnswer[i].getRow() == testBoard[i].getRow() && rightAnswer[i].getCol() == testBoard[i].getCol() &&
-              rightAnswer[i].getRed() == testBoard[i].getRed())) {
-            case1 = false;
+    bool case1 = true, case2 = false, case3 = false;
+    {
+        CheckerPiece *testBoard = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
+        Production::initBoard(testBoard);
+        CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
+        Production::initBoard(rightAnswer);
+        CheckerPiece *newPiece = new Pawn(3, 2, false);
+        *(rightAnswer + 9) = *newPiece;
+        CheckerPiece::PossibleMove *move = (CheckerPiece::PossibleMove *) malloc((sizeof(CheckerPiece::PossibleMove)));
+        move->newPiece = newPiece;
+        move->numJumped = -1;
+        move->jump = false;
+        move->king = false;
+        Production::makeMove(move, 9, testBoard);
+        for (int i = 0; i < 24; i++) {
+            if (!(rightAnswer[i].getRow() == testBoard[i].getRow() &&
+                  rightAnswer[i].getCol() == testBoard[i].getCol() &&
+                  rightAnswer[i].getRed() == testBoard[i].getRed())) {
+                case1 = false;
+            }
+        }
+        if (!case1) {
+            cout << "Fail: Basic move not made" << endl;
+        } else {
+            cout << "Pass: Basic move made correctly" << endl;
         }
     }
-    cout << Production::boardPrint(testBoard)<<endl;
-    if (!case1) {
-        cout << "Fail: Basic Move not made" << endl;
-    } else {
-        cout<< "Pass: Basic Move made correctly"<<endl;
+    {
+        CheckerPiece *testBoard = new Pawn(1, 0, true);
+        CheckerPiece *rightAnswer = new King(0, 1, true);
+        CheckerPiece::PossibleMove *move = (CheckerPiece::PossibleMove *) malloc((sizeof(CheckerPiece::PossibleMove)));
+        CheckerPiece *newPiece = new King(0, 1, true);
+        move->newPiece = newPiece;
+        move->numJumped = -1;
+        move->jump = false;
+        move->king = true;
+        Production::makeMove(move, 0, testBoard);
+        case2 = ((rightAnswer[0].getRow() == testBoard[0].getRow() &&
+                  rightAnswer[0].getCol() == testBoard[0].getCol() &&
+                  rightAnswer[0].getRed() == testBoard[0].getRed() &&
+                  rightAnswer[0].getPawn() == testBoard[0].getPawn()));
+        if (!case2) {
+            cout << "Fail: King move not made" << endl;
+            //cout<<Production::boardPrint(rightAnswer)<<endl;
+            //cout<<Production::boardPrint(testBoard)<<endl;
+        } else {
+            cout << "Pass: King move made correctly" << endl;
+        }
     }
+    {
+        CheckerPiece *testBoard = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 2);
+        testBoard = new Pawn(1, 0, false);
+        *(testBoard+1) = new Pawn(2, 1, true);
+        CheckerPiece *rightAnswer = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 2);
+        *(rightAnswer+1) = new King(0, 1, true);
+        CheckerPiece::PossibleMove *move = (CheckerPiece::PossibleMove *) malloc((sizeof(CheckerPiece::PossibleMove)));
+        CheckerPiece *newPiece = new King(0, 1, true);
+        move->newPiece = newPiece;
+        move->numJumped = 0;
+        move->jump = true;
+        move->king = true;
+        cout<<"about to make move"<<endl;
+        Production::makeMove(move, 1, testBoard);
+        cout<<"made move"<<endl;
+        case3 = ((rightAnswer[1].getRow() == testBoard[1].getRow() &&
+                  rightAnswer[1].getCol() == testBoard[1].getCol() &&
+                  rightAnswer[1].getRed() == testBoard[1].getRed() &&
+                  rightAnswer[1].getPawn() == testBoard[1].getPawn()));
+        if (!case3) {
+            cout << "Fail: Jump into King move not made" << endl;
+            cout<<Production::boardPrint(rightAnswer)<<endl;
+            cout<<Production::boardPrint(testBoard)<<endl;
+        } else {
+            cout << "Pass: Jump into King move made correctly" << endl;
+        }
+    }
+    //cout << Production::boardPrint(testBoard)<<endl;
 
-    return true;
+
+    return case1 && case2;
 }
 
 bool Tests::testPossibleMovesPawn() {

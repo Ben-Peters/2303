@@ -6,7 +6,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "CheckerPiece.h"
-
+using namespace std;
 CheckerPiece::CheckerPiece(int row, int col, bool red) {
     this->row = row;
     this->col = col;
@@ -146,7 +146,7 @@ Pawn::Pawn(int row, int col, bool red) : CheckerPiece(row, col, red) {
 Pawn::~Pawn() {}
 
 CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
-    puts("PawnMethodStart");
+    //puts("PawnMethodStart");
     CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
@@ -154,20 +154,20 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     for (int x = 0; x < 4; x++) {
     	*(possibleMoves + x) = *noMove;
     }
-    puts("a");
+    //puts("a");
     for (int i = -1; i <= 1; i += 2) {
         for (int j = 0; j < 24; j++) {
-            std::cout << j << std::endl;
+            //std::cout << j << std::endl;
             if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                 this->red == (pieces + j)->getRed()) {
-		puts("b1");
+		//puts("b1");
                 //same place same team
                 *(possibleMoves + k++) = *noMove;
-                puts("b");
+                //puts("b");
             } else if (this->row + 1 != (pieces + j)->getRow() && this->col + i != (pieces + j)->getCol() &&
                        (this->row + 1 < 8 && this->col + i < 8 && this->col + i > -1)) {
                 //valid move with no jump or anything like that
-		puts("c1");
+		//puts("c1");
                 CheckerPiece::PossibleMove *move = (PossibleMove * )(malloc(sizeof(PossibleMove)));
                 move->newPiece = new Pawn(this->row + 1, this->col + i, this->red);
                 move->jump = false;
@@ -175,10 +175,10 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                 move->king = false;
                 *(possibleMoves + k++) = *move;
                 //free(move);
-                puts("c");
+                //puts("c");
             } else if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
                        this->red != (pieces + j)->getRed()) {
-		puts("d1");
+		//puts("d1");
                 //same space different team with +/-1(Possible jump)
                 if ((this->row == 6 && !(this->red)) || (this->row == 1 && (this->red))) {
                     //jump would be off the board
@@ -203,14 +203,14 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
                     *(possibleMoves + k++) = *move;
                     //free(move);
                 }
-                puts("d");
+                //puts("d");
             } else {
                 *(possibleMoves + k++) = *noMove;
-		puts("e");
+		//puts("e");
             }
         }
     }
     free(noMove);
-    puts("endMethod");
+    //puts("endMethod");
     return possibleMoves;
 }

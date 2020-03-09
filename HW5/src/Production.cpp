@@ -86,17 +86,17 @@ bool Production::prod(int argc, char *argv[]) {
         cout << ("Before read file") << endl;
         answer = readFile(filename, allPieces, redTurn); //read the file
         cout << ("Back from read file") << endl;
-        cout << "The board:"<< endl;
+        //cout << "The board:"<< endl;
 	free(boardPrint(allPieces));
 
 	ofstream fileOut;
-	fileOut.open("output.txt");
-	fileOut << "OUTPUT FILE";
+	fileOut.open("../output.txt");
+	fileOut << "OUTPUT FILE:\n";
 
 
         srand(time(0));
         for (int i = 0; i < numMoves; i++) {
-            cout<< "Current Board:" << endl;
+            //cout<< "Current Board:" << endl;
             doWriteFile(boardPrint(allPieces), &fileOut);
             int maxPiece = 11;
             int minPiece = 0;
@@ -110,7 +110,7 @@ bool Production::prod(int argc, char *argv[]) {
             for (int j = minPiece; j < maxPiece; j++) {
                 if((allPieces+j)->getPawn()){
                     //Pawn* pawn = (Pawn*) (allPieces+j);
-		    puts("1");
+		    //puts("1");
 		    Pawn* temp = new Pawn((allPieces+j)->getRow(), (allPieces+j)->getCol(), (allPieces+j)->getRed());
                     tempPossibleMoves = temp->getAllPossibleMoves(allPieces);//seems to be dying here for some reason, does not even enter method...
                 }else{
@@ -118,7 +118,7 @@ bool Production::prod(int argc, char *argv[]) {
 		    King* temp = new King((allPieces+j)->getRow(), (allPieces+j)->getCol(), (allPieces+j)->getRed());
                     tempPossibleMoves = temp->getAllPossibleMoves(allPieces);
                 }
-		puts("2");
+		//puts("2");
                 *(possibleMoves + j) = tempPossibleMoves;
             }
             bool madeMove = false;
@@ -205,14 +205,22 @@ int Production::promptNumOfMoves() {
 }
 
 void Production::makeMove(CheckerPiece::PossibleMove *move, int pieceToMove, CheckerPiece *&pieces) {
+    cout<<"in makeMove"<<endl;
     if(move->king){
+        cout<<"Making King"<<endl;
         Pawn *temp = new Pawn((pieces+pieceToMove)->getRow(), (pieces+pieceToMove)->getCol(), (pieces+pieceToMove)->getRed());
-        delete (pieces+pieceToMove);
+        //Pawn *temp = (Pawn*) (pieces+pieceToMove);
+        cout<<"Cased"<<endl;
+        free (pieces+pieceToMove);
+        cout<<"deleted"<<endl;
         *(pieces+pieceToMove) = new King(temp->getRow(),temp->getCol(), temp->getCol());
         delete temp;
+        cout<<"made a King"<<endl;
     }
     if(move->jump){
-        delete (pieces+move->numJumped);
+        cout<< "about to delete"<<endl;
+        free (pieces+(move->numJumped));
+        //cout<<"deleted"<<endl;
     }
     (pieces+pieceToMove)->setRow(move->newPiece->getRow());
     (pieces+pieceToMove)->setCol(move->newPiece->getCol());
@@ -237,8 +245,8 @@ char* Production::boardPrint(CheckerPiece* pieces) {
 		for(int p = 0; p < 24; p++){
 			if ((pieces + p)->getRow() == i / 9 && (pieces + p)->getCol() == i % 9 ) {
 				board[i] = (pieces + p)->getRed()?
-					(pieces + p)->getPawn()? 'r':'R':
-					(pieces + p)->getPawn()? 'b':'B';
+					(pieces + p)->getPawn()? 'R':'r':
+					(pieces + p)->getPawn()? 'B':'b';
 				//cout << "did a thing" << endl;
 			}
 		}
