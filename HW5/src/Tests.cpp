@@ -134,7 +134,7 @@ bool Tests::testMakeMove() {
         } else {
             cout << "Pass: Basic move made correctly" << endl;
         }
-        free (testBoard);
+        free(testBoard);
         free(rightAnswer);
     }
     {
@@ -153,14 +153,14 @@ bool Tests::testMakeMove() {
                   rightAnswer[0].getPawn() == testBoard[0].getPawn()));
         if (!case2) {
             cout << "Fail: King move not made" << endl;
-            cout<<Production::boardPrint(rightAnswer)<<endl;
-            cout<<Production::boardPrint(testBoard)<<endl;
+            cout << Production::boardPrint(rightAnswer) << endl;
+            cout << Production::boardPrint(testBoard) << endl;
         } else {
             cout << "Pass: King move made correctly" << endl;
             //cout<<Production::boardPrint(rightAnswer)<<endl;
             //cout<<Production::boardPrint(testBoard)<<endl;
         }
-        free (testBoard);
+        free(testBoard);
         free(rightAnswer);
     }
     {
@@ -175,9 +175,9 @@ bool Tests::testMakeMove() {
         move->numJumped = 0;
         move->jump = true;
         move->king = true;
-        cout<<"about to make move"<<endl;
+        cout << "about to make move" << endl;
         Production::makeMove(move, 1, testBoard);
-        cout<<"made move"<<endl;
+        cout << "made move" << endl;
         case3 = ((rightAnswer[1].getRow() == testBoard[1].getRow() &&
                   rightAnswer[1].getCol() == testBoard[1].getCol() &&
                   rightAnswer[1].getRed() == testBoard[1].getRed() &&
@@ -188,8 +188,8 @@ bool Tests::testMakeMove() {
             //cout<<(rightAnswer[1].getCol() == testBoard[1].getCol())<<endl;
             //cout<<(rightAnswer[1].getRed() == testBoard[1].getRed())<<endl;
             //cout<<(rightAnswer[1].getPawn() == testBoard[1].getPawn())<<endl;
-            cout<<rightAnswer[1].getRed()<<endl;
-            cout<<testBoard[1].getRed()<<endl;
+            cout << rightAnswer[1].getRed() << endl;
+            cout << testBoard[1].getRed() << endl;
             //cout<<Production::boardPrint(rightAnswer)<<endl;
             //cout<<Production::boardPrint(testBoard)<<endl;
         } else {
@@ -197,17 +197,61 @@ bool Tests::testMakeMove() {
         }
     }
 
-    if(case1 && case2 && case3){
-        cout<<"Pass: Make move works correctly"<<endl;
-    }else{
-        cout<<"Fail: Make move didn't work correctly" <<endl;
+    if (case1 && case2 && case3) {
+        cout << "Pass: Make move works correctly" << endl;
+    } else {
+        cout << "Fail: Make move didn't work correctly" << endl;
     }
     return case1 && case2 && case3;
 }
 
 bool Tests::testPossibleMovesPawn() {
-    puts("Fail: Test of possible moves failed");
-    return true;
+    bool case1 = true, case2 = false, case3 = false, case4 = false;
+    //Case 1
+    {
+        CheckerPiece::PossibleMove *rightAnswer = (CheckerPiece::PossibleMove *) malloc(
+                (sizeof(CheckerPiece::PossibleMove) *
+                 4));
+        CheckerPiece::PossibleMove *trialAnswer = (CheckerPiece::PossibleMove *) malloc(
+                (sizeof(CheckerPiece::PossibleMove) *
+                 4));
+        CheckerPiece *noMovePiece = new Pawn(-1, -1, false);
+        CheckerPiece::PossibleMove *noMove = (CheckerPiece::PossibleMove *) malloc(sizeof(CheckerPiece::PossibleMove));
+        noMove->newPiece = noMovePiece;
+        noMove->king = false;
+        noMove->jump = false;
+        noMove->numJumped = -1;
+        for (int i = 0; i < 4; i++) {
+            rightAnswer[i] = *noMove;
+        }
+        CheckerPiece *board = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
+        Production::initBoard(board);
+        //cout<<Production::boardPrint(board);
+        CheckerPiece piece = new Pawn(0, 3, false);
+        trialAnswer = piece.getAllPossibleMoves(board);
+
+
+        for (int i = 0; i < 4; i++) {
+            if (!((trialAnswer[i].newPiece->getRow() == rightAnswer[i].newPiece->getRow()) &&
+                  (trialAnswer[i].jump == rightAnswer[i].jump) &&
+                  (trialAnswer[i].king == rightAnswer[i].king) &&
+                  (trialAnswer[i].numJumped == rightAnswer[i].numJumped))) {
+                case1 = false;
+            }
+        }
+        if (case1) {
+            puts("Pass: Get all moves didn't find any moves.");
+        } else {
+
+            puts("Fail: Get all moves found non-existent moves.");
+        }
+    }
+    if (case1 && case2 && case3 && case4) {
+        puts("Pass: Test of possible moves Pawn passed");
+    } else {
+        puts("Fail: Test of possible moves Pawn failed");
+    }
+    return case1 && case2 && case3 && case4;
 }
 
 bool Tests::testPossibleMovesKing() {

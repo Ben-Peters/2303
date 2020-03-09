@@ -141,6 +141,7 @@ Pawn::Pawn(int row, int col, bool red) : CheckerPiece(row, col, red) {
     this->row = row;
     this->col = col;
     this->red = red;
+    this->pawn = true;
 }
 
 Pawn::~Pawn() {}
@@ -152,7 +153,7 @@ CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
     noMove->newPiece = new Pawn(-1, -1, false);
     for (int x = 0; x < 4; x++) {
-    	*(possibleMoves + x) = *noMove;
+    	possibleMoves[x] = *noMove;
     }
     //puts("a");
     for (int i = -1; i <= 1; i += 2) {
