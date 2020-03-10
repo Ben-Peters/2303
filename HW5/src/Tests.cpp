@@ -227,9 +227,14 @@ bool Tests::testPossibleMovesPawn() {
         CheckerPiece *board = (CheckerPiece *) malloc(sizeof(CheckerPiece) * 24);
         Production::initBoard(board);
         //cout<<Production::boardPrint(board);
-        CheckerPiece piece = new Pawn(0, 3, false);
-        trialAnswer = piece.getAllPossibleMoves(board);
+        Pawn *piece = new Pawn(0, 3, false);
 
+        trialAnswer = piece->getAllPossibleMoves(board);
+        cout<<"Printing possible boards"<<endl;
+        (Production::printPossibleMoves(trialAnswer,4));
+        cout<<"printed 1"<<endl;
+        (Production::printPossibleMoves(rightAnswer,4));
+        cout<< "printed boards"<<endl;
 
         for (int i = 0; i < 4; i++) {
             if (!((trialAnswer[i].newPiece->getRow() == rightAnswer[i].newPiece->getRow()) &&

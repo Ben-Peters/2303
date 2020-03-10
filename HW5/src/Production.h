@@ -23,6 +23,7 @@ public:
     static void simplePrint(CheckerPiece*);
     static char* boardPrint(CheckerPiece*);
     static void doWriteFile(char*, std::ofstream*);
+    static void printPossibleMoves(CheckerPiece::PossibleMove *possibleMoves, int numElements);
 };
 
 #endif /* PRODUCTION_H_ */
