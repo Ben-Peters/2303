@@ -104,7 +104,7 @@ bool Production::prod(int argc, char *argv[]) {
                 minPiece = 12;
             }
             CheckerPiece::PossibleMove **possibleMoves;
-            possibleMoves = (CheckerPiece::PossibleMove **) malloc(12 * sizeof(malloc(4 * sizeof(possibleMoves))));
+            possibleMoves = (CheckerPiece::PossibleMove **) malloc(12 * sizeof(malloc(4*24 * sizeof(possibleMoves))));
             CheckerPiece::PossibleMove *tempPossibleMoves = (CheckerPiece::PossibleMove *) malloc(
                     sizeof(possibleMoves) * 4);
             for (int j = minPiece; j < maxPiece; j++) {
@@ -127,12 +127,13 @@ bool Production::prod(int argc, char *argv[]) {
             bool madeMove = false;
             while (!madeMove) {
                 int pieceMoved = (rand() % 12) + minPiece;
-                int moveMade = (rand() % 4);
-                if ((*((*(possibleMoves + (pieceMoved))) + moveMade)).newPiece->getRow() != -1) {
+                int moveMade = ((rand() % 4));
+                if (possibleMoves[pieceMoved][moveMade].newPiece->getRow() != -1) {
                     makeMove(*(possibleMoves + (pieceMoved)), pieceMoved, allPieces);
                     madeMove = true;
                 }
             }
+            //cout<<"Made 1 cycle"<<endl;
             redTurn = !redTurn;
         }
     }
@@ -253,22 +254,19 @@ char *Production::boardPrint(CheckerPiece *pieces) {
 }
 
 void Production::printPossibleMoves(CheckerPiece::PossibleMove *possibleMoves, int numElements) {
-    //string *str = new std::string;
-    cout<< "Test "<<endl;
     for (int i = 0; i < numElements; i++) {
-        cout << (possibleMoves[i].newPiece->getRow());
-        cout << (", ");
         cout << (possibleMoves[i].newPiece->getRow());
         cout << (", ");
         cout << possibleMoves[i].newPiece->getCol();
         cout << (", ");
         cout << possibleMoves[i].newPiece->getRed();
-        cout << (reinterpret_cast<const char *>('\n'));
+        cout << endl;
         cout << possibleMoves[i].jump;
-        cout << (reinterpret_cast<const char *>('\n'));
+        cout << endl;
         cout << possibleMoves[i].numJumped;
-        cout << (reinterpret_cast<const char *>('\n'));
+        cout << endl;
         cout << possibleMoves[i].king;
+        cout<<endl;
     }
 }
 

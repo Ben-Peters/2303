@@ -8,12 +8,12 @@ R.R.R.R.
 .R.R.R.R
 R.R.R.R.
 
-BB.B.B.B
+. .B.B.B
 B.B.B.B.
 .B.B.B.B
  . . . .
 . . . . 
 R.R.R.R.
 .R.R.R.R
-R.R. .R.
+R.R.R.R.
 

@@ -80,10 +80,16 @@ King::~King() {}
 
 CheckerPiece::PossibleMove *King::getAllPossibleMoves(CheckerPiece *pieces) {
     puts("kingStart?");
-    CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
+    CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4*24);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
     *noMove->newPiece = new King(-1, -1, false);
+    noMove->king = false;
+    noMove->jump = false;
+    noMove->numJumped = -1;
+    for(int x = 0; x < 4*24; x++){
+        possibleMoves[x] = *noMove;
+    }
     for (int l = 1; l >= -1; l += -2) {
         for (int i = -1; i <= 1; i += 2) {
             for (int j = 0; j < 24; j++) {
@@ -148,19 +154,22 @@ Pawn::~Pawn() {}
 
 CheckerPiece::PossibleMove *Pawn::getAllPossibleMoves(CheckerPiece *pieces) {
     //puts("PawnMethodStart");
-    CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4);
+    CheckerPiece::PossibleMove *possibleMoves = (CheckerPiece::PossibleMove *) malloc(sizeof(PossibleMove) * 4*24);
     int k = 0;
     CheckerPiece::PossibleMove *noMove = (PossibleMove * )(malloc(sizeof(PossibleMove)));
     noMove->newPiece = new Pawn(-1, -1, false);
-    for (int x = 0; x < 4; x++) {
+    noMove->king = false;
+    noMove->jump = false;
+    noMove->numJumped = -1;
+    for (int x = 0; x < 4*24; x++) {
     	possibleMoves[x] = *noMove;
     }
     //puts("a");
     for (int i = -1; i <= 1; i += 2) {
         for (int j = 0; j < 24; j++) {
             //std::cout << j << std::endl;
-            if (this->row + 1 == (pieces + j)->getRow() && this->col + i == (pieces + j)->getCol() &&
-                this->red == (pieces + j)->getRed()) {
+            if (this->row + 1 == pieces[j].getRow() && this->col + i == pieces[j].getCol() &&
+                this->red == pieces[j].getRed()) {
 		//puts("b1");
                 //same place same team
                 *(possibleMoves + k++) = *noMove;
